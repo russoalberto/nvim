@@ -1,7 +1,7 @@
 return {
   {
-    "folke/zen-mode.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    'folke/zen-mode.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
     ops = {
       window = {
         width = 140,
