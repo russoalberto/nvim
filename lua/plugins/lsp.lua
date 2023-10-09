@@ -62,7 +62,7 @@ local servers = {
   -- fontend
   angularls = {},
   cssls = {},
-  eslint = {},
+  -- eslint = {},
   tsserver = {},
   html = {
     settings = {
@@ -174,8 +174,7 @@ return {
             })
           end
         end,
-        root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git',
-          'package.json'),
+        root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git', 'package.json'),
         sources = {
           require 'typescript.extensions.null-ls.code-actions',
           nls.builtins.formatting.stylua,
@@ -208,6 +207,7 @@ return {
         'js-debug-adapter',
         'netcoredbg',
         -- Linter
+        'eslint_d',
         'flake8',
         'shellcheck',
         -- Formatter
