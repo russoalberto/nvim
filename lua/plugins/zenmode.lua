@@ -2,7 +2,7 @@ return {
   {
     'folke/zen-mode.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
-    ops = {
+    opts = {
       window = {
         width = 140,
         options = {
