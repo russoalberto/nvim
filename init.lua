@@ -22,6 +22,4 @@ require('lazy').setup({
   { import = 'plugins' },
 }, {})
 
-require('configs/options')
-require('configs/keymaps')
-require('configs/autocmds')
+require 'configs'
