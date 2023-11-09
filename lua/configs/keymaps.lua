@@ -41,7 +41,7 @@ wk.register({
 })
 
 -- neoTree
-map('n', '<A-t>', '<Cmd>Neotree<CR>', opts)
+map('n', '<A-t>', '<Cmd>Neotree toggle<CR>', opts)
 
 -- LSP format
 vim.keymap.set('n', '<A-i>', function()
@@ -130,7 +130,6 @@ vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 vim.keymap.set('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
 
-vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 
 -- Clear search with <esc>
@@ -172,16 +171,6 @@ vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 -- new file
 vim.keymap.set('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
 
-vim.keymap.set('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
-vim.keymap.set('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
-
--- toggle options
-if vim.lsp.inlay_hint then
-  vim.keymap.set('n', '<leader>uh', function()
-    vim.lsp.inlay_hint(0, nil)
-  end, { desc = 'Toggle Inlay Hints' })
-end
-
 -- quit
 vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
 
@@ -206,14 +195,6 @@ vim.keymap.set('n', '<leader>w-', '<C-W>s', { desc = 'Split window below', remap
 vim.keymap.set('n', '<leader>w|', '<C-W>v', { desc = 'Split window right', remap = true })
 vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split window below', remap = true })
 vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split window right', remap = true })
-
--- tabs
-vim.keymap.set('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
-vim.keymap.set('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
-vim.keymap.set('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-vim.keymap.set('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
-vim.keymap.set('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
-vim.keymap.set('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 -- Zk note
 wk.register({
