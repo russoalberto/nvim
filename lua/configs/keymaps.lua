@@ -195,18 +195,3 @@ vim.keymap.set('n', '<leader>w-', '<C-W>s', { desc = 'Split window below', remap
 vim.keymap.set('n', '<leader>w|', '<C-W>v', { desc = 'Split window right', remap = true })
 vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split window below', remap = true })
 vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split window right', remap = true })
-
--- Zk note
-wk.register({
-  z = {
-    name = 'Zk',
-    n = { "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", 'Create a new note' },
-    o = { "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", 'Open notes' },
-    t = { '<Cmd>ZkTags<CR>', 'Open notes usign seected tags' },
-    f = { "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", 'Search notes' },
-  },
-}, {
-  prefix = '<leader>',
-})
--- Search for the notes matching the current visual selection.
-vim.api.nvim_set_keymap('v', '<leader>zf', ":'<,'>ZkMatch<CR>", opts)
