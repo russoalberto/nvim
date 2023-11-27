@@ -48,12 +48,6 @@ vim.keymap.set('n', '<A-i>', function()
   vim.lsp.buf.format { async = true }
 end, { silent = true })
 
-vim.keymap.set('n', '<leader>xf', function()
-  vim.lsp.buf.code_action {
-    apply = true,
-  }
-end, { noremap = true, silent = true, desc = 'Code fix code_actions' })
-
 -- Zen mode
 wk.register({
   z = {
@@ -84,10 +78,6 @@ map('n', '<C-k>', '<Cmd>TmuxNavigateUp<CR>', opts)
 -- LazyGit
 map('n', '<leader>gg', '<Cmd>LazyGit<CR>', opts)
 
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
@@ -100,7 +90,7 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch existing [B]uffers' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
@@ -143,23 +133,23 @@ vim.keymap.set('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C
 vim.keymap.set({ 'n', 'x' }, 'gw', '*N', { desc = 'Search word under cursor' })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-vim.keymap.set('n', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
-vim.keymap.set('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
-vim.keymap.set('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
-vim.keymap.set('n', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
-vim.keymap.set('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
-vim.keymap.set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
+vim.keymap.set('n', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'next search result' })
+vim.keymap.set('x', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'next search result' })
+vim.keymap.set('o', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'next search result' })
+vim.keymap.set('n', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'prev search result' })
+vim.keymap.set('x', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'prev search result' })
+vim.keymap.set('o', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'prev search result' })
 
--- Add undo break-points
+-- add undo break-points
 vim.keymap.set('i', ',', ',<c-g>u')
 vim.keymap.set('i', '.', '.<c-g>u')
 vim.keymap.set('i', ';', ';<c-g>u')
 
 -- save file
-vim.keymap.set({ 'i', 'v', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
+vim.keymap.set({ 'i', 'v', 'n', 's' }, '<c-s>', '<cmd>w<cr><esc>', { desc = 'save file' })
 
 --keywordprg
-vim.keymap.set('n', '<leader>K', '<cmd>norm! K<cr>', { desc = 'Keywordprg' })
+vim.keymap.set('n', '<leader>k', '<cmd>norm! k<cr>', { desc = 'keywordprg' })
 
 -- better indenting
 vim.keymap.set('v', '<', '<gv')
@@ -167,12 +157,6 @@ vim.keymap.set('v', '>', '>gv')
 
 -- lazy
 vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
-
--- new file
-vim.keymap.set('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
-
--- quit
-vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
 
 -- highlights under cursor
 if vim.fn.has 'nvim-0.9.0' == 1 then
