@@ -7,6 +7,8 @@ return {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
@@ -67,14 +69,14 @@ return {
     end,
   },
   {
-    'jcdickinson/codeium.nvim',
-    event = 'InsertEnter',
+    'Exafunction/codeium.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'hrsh7th/nvim-cmp',
     },
+    event = 'InsertEnter',
     config = function()
-      require('codeium').setup {}
+      require('codeium').setup({})
     end,
   },
 }
