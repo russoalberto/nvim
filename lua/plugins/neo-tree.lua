@@ -15,10 +15,8 @@ return {
       end
     end
   end,
-  deactivate = function()
-    vim.cmd [[Neotree close]]
-  end,
   opts = {
+    window = { position = 'current' },
     sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
     open_files_do_not_replace_types = { 'terminal', 'Trouble', 'qf', 'Outline' },
     filesystem = {
@@ -28,20 +26,6 @@ return {
       filtered_items = {
         hide_dotfiles = false,
         hide_gitignored = false,
-      },
-    },
-    window = {
-      width = 50,
-      mappings = {
-        ['<space>'] = 'none',
-      },
-    },
-    default_component_configs = {
-      indent = {
-        with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-        expander_collapsed = '',
-        expander_expanded = '',
-        expander_highlight = 'NeoTreeExpander',
       },
     },
   },

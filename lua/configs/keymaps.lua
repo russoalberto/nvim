@@ -28,7 +28,13 @@ wk.register({
 })
 
 -- neoTree
-map('n', '<A-t>', '<Cmd>Neotree toggle<CR>', opts)
+wk.register({
+  f = { '<Cmd>Neotree reveal toggle<CR>', '[F]ile Explorer' },
+}, {
+  prefix = '<leader>',
+})
+
+map('n', '<A-f>', '<Cmd>Neotree reveal toggle<CR>', opts)
 
 -- LSP format
 vim.keymap.set('n', '<A-i>', function()
