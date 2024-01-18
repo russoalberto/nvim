@@ -8,9 +8,6 @@ return {
     require('nvim-treesitter.configs').setup {
       -- Add languages to be installed here that you want installed for treesitter
       ensure_installed = {
-        'arduino',
-        'bash',
-        'c',
         'c_sharp',
         'cpp',
         'dockerfile',
@@ -18,38 +15,25 @@ return {
         'html',
         'javascript',
         'json',
-        'lua',
-        'luadoc',
-        'luap',
-        'markdown',
-        'markdown_inline',
         'php',
         'prisma',
-        'python',
-        'query',
         'regex',
         'rust',
         'scss',
         'tsx',
         'typescript',
-        'vim',
-        'vimdoc',
         'yaml',
       },
-
-      -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-      auto_install = false,
-
-      highlight = { enable = true },
-      indent = { enable = true },
-      incremental_selection = {
+      highlight = {
         enable = true,
-        keymaps = {
-          init_selection = '<c-space>',
-          node_incremental = '<c-space>',
-          scope_incremental = '<c-s>',
-          node_decremental = '<M-space>',
-        },
+        disable = function(lang, buf)
+          local max_filesize = 100 * 1024 -- 100 KB
+          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          if ok and stats and stats.size > max_filesize then
+            return true
+          end
+        end,
+        additional_vim_regex_highlighting = false,
       },
     }
   end,
