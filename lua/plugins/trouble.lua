@@ -1,5 +1,5 @@
 return {
-  'folke/trouble.nvim',
-  cmd = { 'TroubleToggle', 'Trouble' },
-  opts = { use_diagnostic_signs = true },
+  "folke/trouble.nvim",
+  event = { 'BufReadPre', 'BufNewFile' },
+  opts = { use_diagnostic_signs = true }
 }
