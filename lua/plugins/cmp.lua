@@ -4,7 +4,6 @@ return {
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       -- LuaSnip
       'L3MON4D3/LuaSnip',
@@ -61,8 +60,7 @@ return {
         },
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'buffer' },
+          { name = 'luasnip', max_item_count = 5 },
           { name = 'path' },
           { name = 'codeium', max_item_count = 3 },
         },

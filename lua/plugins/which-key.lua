@@ -7,19 +7,17 @@ return {
   end,
   opts = {
     plugins = { spelling = true },
-    defaults = {
-      mode = { 'n', 'v' },
-      ['g'] = { name = '+goto' },
-      [']'] = { name = '+next' },
-      ['['] = { name = '+prev' },
-      ['<leader>g'] = { name = '+Git' },
-      ['<leader>s'] = { name = '+Search' },
-      ['<leader>r'] = { name = '+Refactor' },
-    },
   },
   config = function(_, opts)
-    local wk = require 'which-key'
-    wk.setup(opts)
-    wk.register(opts.defaults)
+    require('which-key').setup(opts);
+    require('which-key').register({
+      ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
+      ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+      ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+      ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+      ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+      ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+      ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+    })
   end,
 }
