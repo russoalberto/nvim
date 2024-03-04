@@ -1,3 +1,3 @@
 ### Personal nvim config
 
-Based on Kickstarer.nvim
+Inspired by [Kickstarer.nvim](https://github.com/nvim-lua/kickstart.nvim)
