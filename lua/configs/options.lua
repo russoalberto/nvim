@@ -37,3 +37,7 @@ opt.wrap = false     -- Disable line wrap
 if vim.fn.has 'nvim-0.9.0' == 1 then
   opt.splitkeep = 'screen'
 end
+
+
+vim.g.netrw_banner = 0
+vim.g.netrw_localcopydircmd = 'cp -r'
