@@ -1,6 +1,7 @@
 local servers = {
   -- fontend
   angularls = {},
+  astro = {},
   cssls = {},
   tsserver = {},
   html = {
