@@ -138,7 +138,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>rr', vim.lsp.buf.rename, setOpts('[R]e[n]ame'))
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, setOpts('[C]ode [A]ction'))
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, setOpts('Hover Documentation'))
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, setOpts('Signature Documentation'))
+    vim.keymap.set('n', '<leader>k', vim.lsp.buf.signature_help, setOpts('Signature Documentation'))
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, setOpts('Type [D]efinition'))
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(ev.buf, 'Format', function(_)
