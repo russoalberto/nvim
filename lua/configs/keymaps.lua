@@ -1,28 +1,13 @@
-local opts = { noremap = true, silent = true }
-
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 -- Move to previous/next
-vim.keymap.set("n", "<A->>", ":blast<enter>", opts)
-vim.keymap.set("n", "<A-<>", ":bfirst<enter>", opts)
-vim.keymap.set("n", "<A-,>", ":bprev<enter>", opts)
-vim.keymap.set("n", "<A-.>", ":bnext<enter>", opts)
+vim.keymap.set("n", "<A-,>", ":bprev<enter>", { silent = true })
+vim.keymap.set("n", "<A-.>", ":bnext<enter>", { silent = true })
 vim.keymap.set("n", "<leader>q", ":bdelete<enter>", { desc = '[Q]uit current buffer' })
 
--- File Explorer
-vim.keymap.set('n', '<A-f>', '<Cmd>Oil --float<CR>', opts)
-
--- Undo tree
-vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = '[U]ndo tree' })
-
 -- Tmux
-vim.keymap.set('n', '<C-h>', '<Cmd>NavigatorLeft<CR>', opts)
-vim.keymap.set('n', '<C-l>', '<Cmd>NavigatorRight<CR>', opts)
-vim.keymap.set('n', '<C-j>', '<Cmd>NavigatorDown<CR>', opts)
-vim.keymap.set('n', '<C-k>', '<Cmd>NavigatorUp<CR>', opts)
-
--- LazyGit
-vim.keymap.set('n', '<leader>gg', '<Cmd>LazyGit<CR>', opts)
+vim.keymap.set('n', '<C-h>', '<Cmd>NavigatorLeft<CR>', { silent = true })
+vim.keymap.set('n', '<C-l>', '<Cmd>NavigatorRight<CR>', { silent = true })
+vim.keymap.set('n', '<C-j>', '<Cmd>NavigatorDown<CR>', { silent = true })
+vim.keymap.set('n', '<C-k>', '<Cmd>NavigatorUp<CR>', { silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -37,9 +22,6 @@ vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move down' })
 vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 vim.keymap.set('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
-
--- Search
-vim.keymap.set({ 'n', 'x' }, 'gw', '*N', { desc = 'Search word under cursor' })
 
 -- Clear search with <esc>
 vim.keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
