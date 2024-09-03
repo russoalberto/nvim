@@ -3,7 +3,7 @@ local servers = {
   angularls = {},
   astro = {},
   cssls = {},
-  tsserver = {},
+  ts_ls = {},
   html = {
     settings = {
       html = {
@@ -22,17 +22,7 @@ local servers = {
   -- backend
   intelephense = {},
   gopls = {},
-  omnisharp = {
-    handlers = {
-      ["textDocument/definition"] = function(...)
-        return require("omnisharp_extended").handler(...)
-      end,
-    },
-    enable_roslyn_analyzers = true,
-    organize_imports_on_format = true,
-    enable_import_completion = true,
-    include_prerelease_sdks = true,
-  },
+  omnisharp = {},
   sqlls = {},
   -- fileconfig
   dockerls = {},
@@ -73,7 +63,7 @@ return {
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
       -- Additional plugins for .net
-      "Hoffs/omnisharp-extended-lsp.nvim",
+      "iabdelkareem/csharp.nvim",
     },
     config = function()
       -- Setup neovim lua configuration
@@ -96,6 +86,8 @@ return {
           require('lspconfig')[server_name].setup(server_opts)
         end
       }
+      -- Setup csharp
+      require("csharp").setup({ dap = { enable = false } })
     end,
   },
 }

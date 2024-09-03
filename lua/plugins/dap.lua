@@ -21,31 +21,6 @@ return {
       },
       handlers = {},
     }
-    -- C# and F# debug adapter https://www.lazyvim.org/extras/lang/omnisharp
-    if not dap.adapters["netcoredbg"] then
-      require("dap").adapters["netcoredbg"] = {
-        type = "executable",
-        command = vim.fn.exepath("netcoredbg"),
-        args = { "--interpreter=vscode" },
-      }
-    end
-    for _, lang in ipairs({ "cs", "fsharp", "vb" }) do
-      if not dap.configurations[lang] then
-        dap.configurations[lang] = {
-          {
-            type = "netcoredbg",
-            name = "Launch file",
-            request = "launch",
-            ---@diagnostic disable-next-line: redundant-parameter
-            program = function()
-              return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
-            end,
-            cwd = "${workspaceFolder}",
-          },
-        }
-      end
-    end
-
     vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
     vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
     vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })

@@ -1,5 +1,3 @@
-local csharp = require("langs.csharp")
-
 local function augroup(name)
   return vim.api.nvim_create_augroup('nvim_' .. name, { clear = true })
 end
@@ -104,10 +102,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         callback = vim.lsp.buf.clear_references,
       })
     end
-
-    --Create fix using command for Cshap buffer
-    csharp.create_fix_usings_command(ev.buf)
-    csharp.create_fix_all_command(ev.buf)
   end
 })
 
