@@ -136,3 +136,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     end)
   end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("filetype"),
+  pattern = "odin",
+  callback = function()
+    vim.opt.expandtab = false;
+  end,
+})
