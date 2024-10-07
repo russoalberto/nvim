@@ -18,7 +18,8 @@ return {
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       require('supermaven-nvim').setup({
-        disable_inline_completion = true
+        disable_inline_completion = true,
+        disable_keymaps = true,
       })
       require('luasnip.loaders.from_vscode').lazy_load()
       luasnip.config.setup {}
@@ -63,10 +64,10 @@ return {
           end, { 'i', 's' }),
         },
         sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip',   max_item_count = 5 },
-          { name = 'path' },
-          { name = "supermaven" },
+          { name = 'nvim_lsp',   priority = 99 },
+          { name = 'luasnip',    priority = 98, max_item_count = 5 },
+          { name = "supermaven", priority = 2 },
+          { name = 'path',       priority = 1 },
         },
       }
     end,
