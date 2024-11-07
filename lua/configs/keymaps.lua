@@ -2,6 +2,7 @@
 vim.keymap.set("n", "<A-,>", ":bprev<enter>", { silent = true })
 vim.keymap.set("n", "<A-.>", ":bnext<enter>", { silent = true })
 vim.keymap.set("n", "<leader>q", ":bdelete<enter>", { desc = '[Q]uit current buffer' })
+vim.keymap.set("n", "<leader>Q", ":%bdelete<enter>:Alpha<enter>", { desc = '[Q]uit all buffer' })
 
 -- Tmux
 vim.keymap.set('n', '<C-h>', '<Cmd>NavigatorLeft<CR>', { silent = true })
