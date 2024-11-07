@@ -11,16 +11,10 @@ return {
       'rafamadriz/friendly-snippets',
       -- Codeium
       -- 'Exafunction/codeium.nvim',
-      -- SuperMaven
-      'supermaven-inc/supermaven-nvim',
     },
     config = function()
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
-      require('supermaven-nvim').setup({
-        disable_inline_completion = true,
-        disable_keymaps = true,
-      })
       require('luasnip.loaders.from_vscode').lazy_load()
       luasnip.config.setup {}
 
@@ -65,12 +59,10 @@ return {
         },
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'luasnip',   max_item_count = 5 },
-          { name = "supermaven" },
+          { name = 'luasnip', max_item_count = 5 },
           { name = 'path' },
         },
       }
-      vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { fg = "#d19a66" })
     end,
   }
 }
