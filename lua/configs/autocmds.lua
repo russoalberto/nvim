@@ -1,4 +1,4 @@
-local csharp = require("langs.csharp")
+local csharp = require("utils.csharp")
 
 local function augroup(name)
   return vim.api.nvim_create_augroup('nvim_' .. name, { clear = true })

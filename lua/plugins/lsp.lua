@@ -3,7 +3,7 @@ local servers = {
   angularls = {},
   astro = {},
   cssls = {},
-  tsserver = {},
+  ts_ls = {},
   html = {
     settings = {
       html = {
@@ -32,6 +32,7 @@ local servers = {
     organize_imports_on_format = true,
     enable_import_completion = true,
     include_prerelease_sdks = true,
+    enable_decompilation_support = true,
   },
   sqlls = {},
   -- fileconfig
