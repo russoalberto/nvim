@@ -1,5 +1,4 @@
 local opt = vim.opt
-local g = vim.g
 
 opt.breakindent = true        -- Enable break indent
 opt.clipboard = 'unnamedplus' -- Sync with system clipboard
@@ -35,10 +34,3 @@ opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.wrap = false     -- Disable line wrap
-opt.laststatus = 3
-
-if vim.fn.has 'nvim-0.9.0' == 1 then
-  opt.splitkeep = 'screen'
-end
-
-g.bigfile_size = 1000 * 1024
