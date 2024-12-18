@@ -35,7 +35,6 @@ opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.wrap = false     -- Disable line wrap
-opt.laststatus = 3
 
 if vim.fn.has 'nvim-0.9.0' == 1 then
   opt.splitkeep = 'screen'
