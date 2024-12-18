@@ -4,7 +4,6 @@ return {
     tag = '0.1.5',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      "debugloop/telescope-undo.nvim",
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
     },
     config = function()
@@ -34,13 +33,9 @@ return {
           },
         },
       })
-      require('telescope').load_extension('undo')
       require('telescope').load_extension('fzf')
 
-      -- keymaps
-      -- See `:help telescope.builtin`
       local builtin = require('telescope.builtin')
-
       vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = '[<space>] Search all files' })
       vim.keymap.set('n', '<leader>/', function()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
