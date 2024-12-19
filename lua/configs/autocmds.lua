@@ -1,5 +1,3 @@
-local csharp = require("utils.csharp")
-
 local function augroup(name)
   return vim.api.nvim_create_augroup('nvim_' .. name, { clear = true })
 end
@@ -78,9 +76,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.api.nvim_buf_create_user_command(ev.buf, 'Format', function(_)
       vim.lsp.buf.format()
     end, { desc = 'Format current buffer with LSP' })
-
-    --Create fix using command for Cshap buffer
-    csharp.create_fix_usings_command(ev.buf)
-    csharp.create_fix_all_command(ev.buf)
   end
 })
