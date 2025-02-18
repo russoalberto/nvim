@@ -91,6 +91,8 @@ return {
   {
     "OXY2DEV/markview.nvim",
     event = { 'BufReadPost', 'BufNewFile' },
+    filetypes = { "markdown", "codecompanion" },
+    ignore_buftypes = {},
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     }
