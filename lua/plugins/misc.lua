@@ -98,5 +98,32 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     }
+  },
+  {
+    "shortcuts/no-neck-pain.nvim",
+    version = "*",
+    config = function()
+      require("no-neck-pain").setup({
+        width = 130,
+        autocmds = {
+          enableOnVimEnter = 'safe',
+        },
+        buffers = {
+          right = {
+            enabled = false,
+          },
+          scratchPad = {
+            enabled = true,
+            location = "~/notes/",
+          },
+          bo = {
+            filetype = "md"
+          },
+        },
+        mappings = {
+          enabled = true
+        }
+      })
+    end
   }
 }
