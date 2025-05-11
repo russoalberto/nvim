@@ -21,15 +21,17 @@ return {
         enabled = true,
         notify = false,
         size = 1.5 * 1024 * 1024,
+        line_length = 1.5 * 1024 * 1024,
       },
       dashboard = {
         enabled = true,
         sections = {
           { section = "header" },
-          { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 2 },
-          { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 2 },
-          { section = "startup" },
-        },
+          { title = "MRU ",           file = vim.fn.fnamemodify(".", ":~"), padding = 1 },
+          { section = "recent_files", cwd = true,                           limit = 8,  padding = 1 },
+          { title = "MRU",            padding = 1 },
+          { section = "recent_files", limit = 8,                            padding = 1 },
+        }
       },
       indent = {
         enabled = true,
