@@ -11,12 +11,11 @@ return {
   config = function(_, opts)
     require('which-key').setup(opts)
     require("which-key").add({
-      { '<leader>a', group = '[A]I companion' },
+      { '<leader>a', group = '[A]vante AI' },
       { '<leader>c', group = '[C]ode' },
       { '<leader>b', group = '[B]uffer' },
       { '<leader>d', group = '[D]ebug' },
       { '<leader>g', group = '[G]it' },
-      { '<leader>n', group = '[N]o neck pain' },
       { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
       { '<leader>w', group = '[W]orkspace' },
