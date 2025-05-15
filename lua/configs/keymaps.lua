@@ -1,8 +1,6 @@
 -- Move to previous/next
 vim.keymap.set("n", "<A-,>", ":bprev<enter>", { silent = true })
 vim.keymap.set("n", "<A-.>", ":bnext<enter>", { silent = true })
-vim.keymap.set("n", "<leader>q", ":bdelete<CR>", { desc = '[Q]uit current buffer' })
-vim.keymap.set("n", "<leader>Q", ":%bdelete<CR>", { desc = '[Q]uit all buffer' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic [E]rror' })
@@ -34,7 +32,7 @@ vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = '[F]ormat buffer' 
 --AI
 vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionActions<cr>",
   { desc = '[A]I [A]ctions', noremap = true, silent = true })
-vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionChat<cr>",
+vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>",
   { desc = '[A]I [C]hat', noremap = true, silent = true })
 vim.keymap.set("v", "<leader>ad", "<cmd>CodeCompanionChat Add<cr>",
   { desc = '[A]I A[d]d', noremap = true, silent = true })

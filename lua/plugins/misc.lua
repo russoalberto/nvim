@@ -68,6 +68,9 @@ return {
       term = { enabled = true },
     },
     keys = {
+      { "<leader>qq", function() Snacks.bufdelete() end,        desc = "[Q]uit current buffer" },
+      { "<leader>qa", function() Snacks.bufdelete.all() end,    desc = "[Q]uit [a]ll buffers" },
+      { "<leader>qo", function() Snacks.bufdelete.other() end,  desc = "[Q]uit [o]ther buffers" },
       { "<leader>z",  function() Snacks.zen() end,              desc = "Toggle Zen Mode" },
       { "<leader>Z",  function() Snacks.zen.zoom() end,         desc = "Toggle Zoom" },
       { "<leader>gB", function() Snacks.gitbrowse() end,        desc = "Git Browse",                  mode = { "n", "v" } },
@@ -93,8 +96,12 @@ return {
   {
     "OXY2DEV/markview.nvim",
     event = { 'BufReadPost', 'BufNewFile' },
-    filetypes = { "markdown", "codecompanion" },
-    ignore_buftypes = {},
+    opts = {
+      preview = {
+        filetypes = { "md", "markdown", "codecompanion", "telekasten" },
+        ignore_buftypes = {},
+      },
+    },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     }
@@ -104,7 +111,7 @@ return {
     dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require('telekasten').setup({
-        home = vim.fn.expand("~/notes"), -- Put the name of your notes directory here
+        home = vim.fn.expand("~/notes"),
       })
     end
   },
