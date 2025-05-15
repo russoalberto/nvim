@@ -18,13 +18,11 @@ return {
     ---@type snacks.Config
     opts = {
       bigfile = {
-        enabled = true,
         notify = false,
         size = 1.5 * 1024 * 1024,
         line_length = 1.5 * 1024 * 1024,
       },
       dashboard = {
-        enabled = true,
         sections = {
           { section = "header" },
           { title = "MRU ",           file = vim.fn.fnamemodify(".", ":~"), padding = 1 },
@@ -34,7 +32,6 @@ return {
         }
       },
       indent = {
-        enabled = true,
         animate = { enabled = false },
         scope = { enabled = false },
         filter = function(buf)
@@ -45,40 +42,70 @@ return {
           return vim.g.snacks_indent ~= false and vim.b[buf].snacks_indent ~= false and vim.bo[buf].buftype == ""
         end,
       },
-      git = { enabled = true },
-      gitbrowse = { enabled = true },
-      lazygit = { enabled = true },
-      notifier = { enabled = false },
-      quickfile = { enabled = true },
-      statuscolumn = {
-        enabled = true,
-        left = { "mark", "sign" }, -- priority of signs on the left (high to low)
-        right = { "fold", "git" }, -- priority of signs on the right (high to low)
-        folds = {
-          open = false,            -- show open fold icons
-          git_hl = false,          -- use Git Signs hl for fold icons
-        },
-        git = {
-          patterns = { "GitSign", "MiniDiffSign" },
-        },
-        refresh = 50,
-      },
-      words = { enabled = true },
-      zen = { enabled = true },
-      term = { enabled = true },
+      git = {},
+      gitbrowse = {},
+      lazygit = {},
+      image = {},
+      quickfile = {},
+      picker = {},
+      scratch = {},
+      scroll = {},
+      statuscolumn = {},
+      words = {},
+      zen = {},
     },
     keys = {
-      { "<leader>qq", function() Snacks.bufdelete() end,        desc = "[Q]uit current buffer" },
-      { "<leader>qa", function() Snacks.bufdelete.all() end,    desc = "[Q]uit [a]ll buffers" },
-      { "<leader>qo", function() Snacks.bufdelete.other() end,  desc = "[Q]uit [o]ther buffers" },
-      { "<leader>z",  function() Snacks.zen() end,              desc = "Toggle Zen Mode" },
-      { "<leader>Z",  function() Snacks.zen.zoom() end,         desc = "Toggle Zoom" },
-      { "<leader>gB", function() Snacks.gitbrowse() end,        desc = "Git Browse",                  mode = { "n", "v" } },
-      { "<leader>gb", function() Snacks.git.blame_line() end,   desc = "Git Blame Line" },
-      { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
-      { "<leader>gg", function() Snacks.lazygit() end,          desc = "Lazygit" },
-      { "<leader>gl", function() Snacks.lazygit.log() end,      desc = "Lazygit Log (cwd)" },
-      { "<c-/>",      function() Snacks.terminal() end,         desc = "Toggle Terminal" },
+      -- Buffer quit
+      { "<leader>qq",      function() Snacks.bufdelete() end,                                      desc = "[Q]uit current buffer" },
+      { "<leader>qa",      function() Snacks.bufdelete.all() end,                                  desc = "[Q]uit [a]ll buffers" },
+      { "<leader>qo",      function() Snacks.bufdelete.other() end,                                desc = "[Q]uit [o]ther buffers" },
+      -- Zen
+      { "<leader>z",       function() Snacks.zen() end,                                            desc = "Toggle Zen Mode" },
+      { "<leader>Z",       function() Snacks.zen.zoom() end,                                       desc = "Toggle Zoom" },
+      -- Git
+      { "<leader>gB",      function() Snacks.gitbrowse() end,                                      desc = "Git Browse",                  mode = { "n", "v" } },
+      { "<leader>gb",      function() Snacks.git.blame_line() end,                                 desc = "Git Blame Line" },
+      { "<leader>gf",      function() Snacks.lazygit.log_file() end,                               desc = "Lazygit Current File History" },
+      { "<leader>gg",      function() Snacks.lazygit() end,                                        desc = "Lazygit" },
+      { "<leader>gl",      function() Snacks.lazygit.log() end,                                    desc = "Lazygit Log (cwd)" },
+      -- Note
+      { "<leader>na",      function() Snacks.scratch() end,                                        desc = "[N]ote [a]dd" },
+      { "<leader>ns",      function() Snacks.scratch.select() end,                                 desc = "[N]ote [s]elect" },
+      -- Search
+      { "<leader><space>", function() Snacks.picker.smart() end,                                   desc = "Smart Search Files" },
+      { "<leader>.",       function() Snacks.picker.recent() end,                                  desc = "Recent" },
+      { '<leader>s"',      function() Snacks.picker.registers() end,                               desc = "Registers" },
+      { '<leader>s/',      function() Snacks.picker.search_history() end,                          desc = "Search History" },
+      { "<leader>sa",      function() Snacks.picker.autocmds() end,                                desc = "Autocmds" },
+      { "<leader>sb",      function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
+      { "<leader>sB",      function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
+      { "<leader>sc",      function() Snacks.picker.command_history() end,                         desc = "Command History" },
+      { "<leader>sC",      function() Snacks.picker.commands() end,                                desc = "Commands" },
+      { "<leader>sd",      function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
+      { "<leader>sD",      function() Snacks.picker.diagnostics_buffer() end,                      desc = "Buffer Diagnostics" },
+      { "<leader>sf",      function() Snacks.picker.files() end,                                   desc = "Search Files" },
+      { "<leader>sg",      function() Snacks.picker.grep() end,                                    desc = "Grep" },
+      { "<leader>sG",      function() Snacks.picker.git_files() end,                               desc = "Search Git Files" },
+      { "<leader>sh",      function() Snacks.picker.help() end,                                    desc = "Help Pages" },
+      { "<leader>sH",      function() Snacks.picker.highlights() end,                              desc = "Highlights" },
+      { "<leader>si",      function() Snacks.picker.icons() end,                                   desc = "Icons" },
+      { "<leader>sj",      function() Snacks.picker.jumps() end,                                   desc = "Jumps" },
+      { "<leader>sk",      function() Snacks.picker.keymaps() end,                                 desc = "Keymaps" },
+      { "<leader>sm",      function() Snacks.picker.marks() end,                                   desc = "Marks" },
+      { "<leader>sN",      function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Search Config File" },
+      { "<leader>sp",      function() Snacks.picker.lazy() end,                                    desc = "Search for Plugin Spec" },
+      { "<leader>sq",      function() Snacks.picker.qflist() end,                                  desc = "Quickfix List" },
+      { "<leader>sR",      function() Snacks.picker.resume() end,                                  desc = "Resume" },
+      { "<leader>su",      function() Snacks.picker.undo() end,                                    desc = "Undo History" },
+      { "<leader>sw",      function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word",    mode = { "n", "x" } },
+      -- LSP
+      { "gd",              function() Snacks.picker.lsp_definitions() end,                         desc = "Goto Definition" },
+      { "gD",              function() Snacks.picker.lsp_declarations() end,                        desc = "Goto Declaration" },
+      { "gr",              function() Snacks.picker.lsp_references() end,                          nowait = true,                        desc = "References" },
+      { "gI",              function() Snacks.picker.lsp_implementations() end,                     desc = "Goto Implementation" },
+      { "gy",              function() Snacks.picker.lsp_type_definitions() end,                    desc = "Goto T[y]pe Definition" },
+      { "<leader>ss",      function() Snacks.picker.lsp_symbols() end,                             desc = "LSP Symbols" },
+      { "<leader>sS",      function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
     },
   },
   {
@@ -98,21 +125,12 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {
       preview = {
-        filetypes = { "md", "markdown", "codecompanion", "telekasten" },
+        filetypes = { "md", "markdown", "codecompanion" },
         ignore_buftypes = {},
       },
     },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     }
-  },
-  {
-    'renerocksai/telekasten.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim' },
-    config = function()
-      require('telekasten').setup({
-        home = vim.fn.expand("~/notes"),
-      })
-    end
   },
 }

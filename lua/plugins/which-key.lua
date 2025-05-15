@@ -15,10 +15,12 @@ return {
       { '<leader>c', group = '[C]ode' },
       { '<leader>b', group = '[B]uffer' },
       { '<leader>d', group = '[D]ebug' },
+      { '<leader>f', group = '[F]ind' },
       { '<leader>g', group = '[G]it' },
+      { '<leader>n', group = '[N]ote' },
+      { '<leader>q', group = '[Q]uit' },
       { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
-      { '<leader>t', group = '[T]elekasten' },
       { '<leader>w', group = '[W]orkspace' },
     })
   end,
