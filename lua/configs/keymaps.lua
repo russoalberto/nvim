@@ -29,6 +29,9 @@ vim.keymap.set('n', '<leader>m', '<cmd>Mason<cr>', { desc = '[M]ason' })
 -- Format
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Buffer [F]ormat' })
 
+-- Rename
+vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { desc = 'Buffer [R]ename' })
+
 --AI
 vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionActions<cr>",
   { desc = '[A]I [A]ctions', noremap = true, silent = true })
