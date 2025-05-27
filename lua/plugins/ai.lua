@@ -14,11 +14,21 @@ return {
           },
           inline = {
             adapter = "gemini",
+            keymaps = {
+              accept_change = {
+                modes = { n = "gra" },
+                description = "[A]ccept the suggested change",
+              },
+              reject_change = {
+                modes = { n = "grj" },
+                description = "Re[j]ect the suggested change",
+              },
+            },
           },
         },
         display = {
           action_palette = {
-            provider = "snacks", 
+            provider = "snacks",
           },
         }
       })

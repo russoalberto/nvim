@@ -36,4 +36,3 @@ opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.wrap = false     -- Disable line wrap
 opt.foldlevel = 99
 opt.foldmethod = "expr"
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
