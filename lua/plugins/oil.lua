@@ -13,6 +13,7 @@ return {
         ["<C-t>"] = "actions.select_tab",
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = "actions.close",
+        ["q"] = "actions.close",
         ["<C-l>"] = "actions.refresh",
         ["-"] = "actions.parent",
         ["_"] = "actions.open_cwd",
@@ -27,6 +28,5 @@ return {
     })
     -- File Explorer
     vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { silent = true })
-    vim.keymap.set('n', '<leader>-', '<Cmd>Oil --float<CR>', { desc = '[-] File Explorer' })
   end
 }
