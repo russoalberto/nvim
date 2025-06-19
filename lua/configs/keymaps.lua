@@ -22,15 +22,6 @@ vim.keymap.set('n', '<leader>m', '<cmd>Mason<cr>', { desc = '[M]ason' })
 -- Format
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Buffer [F]ormat' })
 
-
---AI
-vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionActions<cr>",
-  { desc = '[A]I [A]ctions', noremap = true, silent = true })
-vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>",
-  { desc = '[A]I [C]hat', noremap = true, silent = true })
-vim.keymap.set("v", "<leader>ad", "<cmd>CodeCompanionChat Add<cr>",
-  { desc = '[A]I A[d]d', noremap = true, silent = true })
-
 -- Hardmode: disable arrow keys
 vim.keymap.set({ 'v', 'n', 's' }, '<Left>', '<Nop>', { silent = true })
 vim.keymap.set({ 'v', 'n', 's' }, '<Right>', '<Nop>', { silent = true })
