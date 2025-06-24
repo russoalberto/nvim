@@ -1,30 +1,37 @@
 return {
+  -- AI
   {
-    "yetone/avante.nvim",
-    build = "make",
-    event = "VeryLazy",
-    version = false,
-    ---@module 'avante'
-    ---@type avante.Config
-    ---@diagnostic disable-next-line: missing-fields
-    opts = {
-      provider = "gemini",
-      providers = {
-        gemini = {
-          model = "gemini-2.5-flash-preview-05-20",
-        },
-      },
-      selector = {
-        --- @type avante.SelectorProvider
-        provider = "snacks",
-        -- Options override for custom providers
-        provider_opts = {},
-      }
-    },
+    "olimorris/codecompanion.nvim",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
       "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
+      "nvim-treesitter/nvim-treesitter",
     },
-  }
+    config = function()
+      require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = "gemini",
+          },
+          inline = {
+            adapter = "gemini",
+            keymaps = {
+              accept_change = {
+                modes = { n = "gra" },
+                description = "[A]ccept the suggested change",
+              },
+              reject_change = {
+                modes = { n = "grj" },
+                description = "Re[j]ect the suggested change",
+              },
+            },
+          },
+        },
+        display = {
+          action_palette = {
+            provider = "snacks",
+          },
+        }
+      })
+    end,
+  },
 }
