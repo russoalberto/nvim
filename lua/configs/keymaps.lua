@@ -1,6 +1,15 @@
--- Move to previous/next
-vim.keymap.set("n", "<A-,>", ":bprev<enter>", { silent = true })
-vim.keymap.set("n", "<A-.>", ":bnext<enter>", { silent = true })
+-- Move to previous/next quickfix
+vim.keymap.set('n', '<M-j>', ':cnext<CR>', { silent = true })
+vim.keymap.set('n', '<M-k>', ':cprev<CR>', { silent = true })
+
+-- Tmux
+vim.keymap.set('n', '<C-h>', '<Cmd>NavigatorLeft<CR>', { silent = true })
+vim.keymap.set('n', '<C-l>', '<Cmd>NavigatorRight<CR>', { silent = true })
+vim.keymap.set('n', '<C-j>', '<Cmd>NavigatorDown<CR>', { silent = true })
+vim.keymap.set('n', '<C-k>', '<Cmd>NavigatorUp<CR>', { silent = true })
+
+vim.keymap.set('n', '<leader>q', ':bdelete<CR>', { desc = '[Q]uit current buffer' })
+vim.keymap.set('n', '<leader>Q', ':%bdelete<CR>', { desc = '[Q]uit all buffer' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic [E]rror' })
@@ -13,23 +22,17 @@ vim.keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and 
 vim.keymap.set({ 'i', 'v', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'save file' })
 vim.keymap.set({ 'n' }, '<leader>w', '<cmd>w<cr><esc>', { desc = 'Save file' })
 
--- Lazy
-vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = '[L]azy' })
-
--- Mason
-vim.keymap.set('n', '<leader>m', '<cmd>Mason<cr>', { desc = '[M]ason' })
-
--- Format
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Buffer [F]ormat' })
-
-
 --AI
-vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionActions<cr>",
-  { desc = '[A]I [A]ctions', noremap = true, silent = true })
-vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>",
-  { desc = '[A]I [C]hat', noremap = true, silent = true })
-vim.keymap.set("v", "<leader>ad", "<cmd>CodeCompanionChat Add<cr>",
-  { desc = '[A]I A[d]d', noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<leader>aa', '<cmd>CodeCompanionActions<cr>', { desc = '[A]I [A]ctions' })
+vim.keymap.set({ 'n', 'v' }, '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', { desc = '[A]I [C]hat' })
+vim.keymap.set('v', '<leader>ad', '<cmd>CodeCompanionChat Add<cr>', { desc = '[A]I A[d]d' })
+
+-- File explorer
+vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { silent = true })
+
+-- Zk notes
+vim.keymap.set('n', '<leader>zn', '<Cmd>ZkNew<CR>', { desc = '[Z]k [N]ew' })
+vim.keymap.set('n', '<leader>zl', '<Cmd>ZkNotes<CR>', { desc = '[Z]k [L]ist' })
 
 -- Hardmode: disable arrow keys
 vim.keymap.set({ 'v', 'n', 's' }, '<Left>', '<Nop>', { silent = true })

@@ -1,40 +1,28 @@
 local servers = {
-  -- fontend
   angularls = {},
-  astro = {},
+  bashls = {},
+  clangd = {},
   cssls = {},
-  ts_ls = {},
-  html = {
-    settings = {
-      html = {
-        format = {
-          tabSize = 2,
-          insertSpace = true,
-          wrapAttributesIndentSize = 2,
-          wrapAttributes = 'preserve',
-          wrapLineLength = 0,
-        },
-      },
-    },
-  },
-  tailwindcss = {},
-
-  -- backend
+  docker_compose_language_service = {},
+  dockerls = {},
+  html = {},
   intelephense = {},
-  gopls = {},
+  jsonls = {},
+  lua_ls = {},
+  marksman = {},
   omnisharp = {
     handlers = {
-      ["textDocument/definition"] = function(...)
-        return require("omnisharp_extended").handler(...)
+      ['textDocument/definition'] = function(...)
+        return require('omnisharp_extended').handler(...)
       end,
-      ["textDocument/typeDefinition"] = function(...)
-        return require("omnisharp_extended").handler(...)
+      ['textDocument/typeDefinition'] = function(...)
+        return require('omnisharp_extended').handler(...)
       end,
-      ["textDocument/references"] = function(...)
-        return require("omnisharp_extended").handler(...)
+      ['textDocument/references'] = function(...)
+        return require('omnisharp_extended').handler(...)
       end,
-      ["textDocument/implementation"] = function(...)
-        return require("omnisharp_extended").handler(...)
+      ['textDocument/implementation'] = function(...)
+        return require('omnisharp_extended').handler(...)
       end,
     },
     enable_roslyn_analyzers = true,
@@ -43,29 +31,11 @@ local servers = {
     include_prerelease_sdks = true,
     enable_decompilation_support = true,
   },
-  sqlls = {},
-  -- fileconfig
-  dockerls = {},
-  docker_compose_language_service = {},
-  yamlls = {},
-  jsonls = {},
-  marksman = {},
-  -- system
-  bashls = {},
-  clangd = {},
-  ols = {},
-  rust_analyzer = {},
-  -- misc
   prismals = {},
-  lua_ls = {
-    settings = {
-      Lua = {
-        workspace = { checkThirdParty = false },
-        telemetry = { enable = false },
-        completion = { callSnippet = "Replace" },
-      },
-    },
-  },
+  sqlls = {},
+  tailwindcss = {},
+  ts_ls = {},
+  yamlls = {},
 }
 
 return {
@@ -73,34 +43,24 @@ return {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
       {
-        "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
+        'folke/lazydev.nvim',
+        ft = 'lua',
         opts = {
           library = {
-            -- See the configuration section for more details
-            -- Load luvit types when the `vim.uv` word is found
-            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
           },
         },
       },
-      -- Additional plugins for .net
-      "Hoffs/omnisharp-extended-lsp.nvim",
+      'Hoffs/omnisharp-extended-lsp.nvim',
     },
     config = function()
-      -- Setup Mason
       require('mason').setup()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      -- Ensure the servers above are installed
       local mason_lspconfig = require 'mason-lspconfig'
       mason_lspconfig.setup {
         automatic_installation = false,
