@@ -11,6 +11,7 @@ return {
   config = function(_, opts)
     require('which-key').setup(opts)
     require("which-key").add({
+      { '<leader>a', group = '[A]vante AI' },
       { '<leader>c', group = '[C]ode' },
       { '<leader>b', group = '[B]uffer' },
       { '<leader>d', group = '[D]ebug' },
