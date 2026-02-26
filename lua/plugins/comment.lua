@@ -1,10 +1,5 @@
 return {
   {
-    'numToStr/Comment.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = {},
-  },
-  {
     'folke/todo-comments.nvim',
     cmd = { 'TodoTrouble', 'TodoTelescope' },
     event = { 'BufReadPost', 'BufNewFile' },
