@@ -46,7 +46,6 @@ local servers = {
   ols = {},
   rust_analyzer = {},
   -- misc
-  grammarly = {},
   prismals = {},
   lua_ls = {
     settings = {
