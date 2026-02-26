@@ -15,6 +15,7 @@ return {
       htmlangular = { 'prettier' },
       lua = { 'stylua' },
       php = { 'php_cs_fixer' },
+      terraform = { 'terraform' },
       typescript = { 'prettier' },
     },
   },

@@ -13,28 +13,8 @@ return {
     },
     keymap = {
       ['<CR>'] = { 'accept', 'fallback' },
-      ['<Tab>'] = {
-        function(cmp)
-          if cmp.snippet_active() then
-            return cmp.snippet_forward()
-          else
-            return cmp.select_next()
-          end
-        end,
-        'select_and_accept',
-        'fallback',
-      },
-      ['<S-Tab>'] = {
-        function(cmp)
-          if cmp.snippet_active() then
-            return cmp.snippet_backward()
-          else
-            return cmp.select_prev()
-          end
-        end,
-        'select_and_accept',
-        'fallback',
-      },
+      ['<C-k>'] = { 'select_prev', 'fallback_to_mappings' },
+      ['<C-j>'] = { 'select_next', 'fallback_to_mappings' },
     },
   },
 }

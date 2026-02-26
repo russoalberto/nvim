@@ -54,3 +54,19 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     vim.bo.filetype = "caddy"
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = vim.api.nvim_create_augroup("terraform_ft", { clear = true }),
+  pattern = { "*.tf.json", "*.tf"},
+  callback = function()
+    vim.bo.filetype = "terraform"
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = vim.api.nvim_create_augroup("json_ft", { clear = true }),
+  pattern = { "*.tfstate"},
+  callback = function()
+    vim.bo.filetype = "json"
+  end,
+})

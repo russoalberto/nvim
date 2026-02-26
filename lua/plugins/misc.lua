@@ -11,7 +11,7 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {
       preview = {
-        filetypes = { 'md', 'markdown', 'codecompanion' },
+        filetypes = {  'codecompanion' },
         ignore_buftypes = {},
       },
     },

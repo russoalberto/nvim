@@ -30,7 +30,9 @@ return {
     { '<leader>sq', '<cmd>FzfLua quickfix<cr>', desc = '[S]earch [Q]uickfix' },
   },
   opts = {
-    'ivy',
+    files = {
+      path_shorten = 3,
+    },
     oldfiles = {
       include_current_session = true,
       cwd_only = true,
