@@ -26,14 +26,14 @@ wk.register({
   prefix = '<leader>',
 })
 
--- neoTree
+-- File Explorer
 wk.register({
-  f = { '<Cmd>Neotree reveal toggle<CR>', '[F]ile Explorer' },
+  f = { '<Cmd>Oil --float<CR>', '[F]ile Explorer' },
 }, {
   prefix = '<leader>',
 })
 
-map('n', '<A-f>', '<Cmd>Neotree reveal toggle<CR>', opts)
+map('n', '<A-f>', '<Cmd>Oil --float<CR>', opts)
 
 -- LSP format
 vim.keymap.set('n', '<A-i>', function()
