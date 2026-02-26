@@ -5,13 +5,15 @@ local servers = {
   cssls = {},
   tsserver = {},
   html = {
-    html = {
-      format = {
-        tabSize = 2,
-        useTabs = false,
-        wrapAttributesIndentSize = 2,
-        wrapAttributes = 'preserve',
-        wrapLineLength = 0,
+    settings = {
+      html = {
+        format = {
+          tabSize = 2,
+          useTabs = false,
+          wrapAttributesIndentSize = 2,
+          wrapAttributes = 'preserve',
+          wrapLineLength = 0,
+        },
       },
     },
   },
@@ -20,7 +22,17 @@ local servers = {
   -- backend
   intelephense = {},
   gopls = {},
-  omnisharp = {},
+  omnisharp = {
+    handlers = {
+      ["textDocument/definition"] = function(...)
+        return require("omnisharp_extended").handler(...)
+      end,
+    },
+    enable_roslyn_analyzers = true,
+    organize_imports_on_format = true,
+    enable_import_completion = true,
+    include_prerelease_sdks = true,
+  },
   sqlls = {},
   -- fileconfig
   dockerls = {},
@@ -35,10 +47,12 @@ local servers = {
   grammarly = {},
   prismals = {},
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      completion = { callSnippet = "Replace" },
+    settings = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
+        completion = { callSnippet = "Replace" },
+      },
     },
   },
 }
@@ -57,6 +71,8 @@ return {
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
+      -- Additional plugins for .net
+      "Hoffs/omnisharp-extended-lsp.nvim",
     },
     config = function()
       -- Setup neovim lua configuration
@@ -72,14 +88,12 @@ return {
       mason_lspconfig.setup {
         ensure_installed = vim.tbl_keys(servers),
       }
-
       mason_lspconfig.setup_handlers {
         function(server_name)
-          require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            settings = (servers[server_name] or {}),
-          }
-        end,
+          local server_opts = servers[server_name] or {}
+          table.insert(server_opts, { capabilities = capabilities })
+          require('lspconfig')[server_name].setup(server_opts)
+        end
       }
     end,
   },
