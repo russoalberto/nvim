@@ -35,9 +35,9 @@ local servers = {
   prismals = {},
   lua_ls = {
     Lua = {
-      runtime = { version = 'LuaJIT' },
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      completion = { callSnippet = "Replace" },
     },
   },
 }
