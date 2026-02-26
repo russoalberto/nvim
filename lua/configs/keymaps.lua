@@ -1,8 +1,5 @@
 local wk = require 'which-key'
 
-local mark = require 'harpoon.mark'
-local ui = require 'harpoon.ui'
-
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
@@ -55,10 +52,6 @@ vim.keymap.set('n', '<leader>xf', function()
     apply = true,
   }
 end, { noremap = true, silent = true, desc = 'Code fix code_actions' })
-
--- Harpoon
-vim.keymap.set('n', '<leader>a', mark.add_file, { desc = 'Harpoon: add file' })
-vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu)
 
 -- Zen mode
 wk.register({
@@ -144,7 +137,8 @@ vim.keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and 
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
-vim.keymap.set('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / clear hlsearch / diff update' })
+vim.keymap.set('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
+  { desc = 'Redraw / clear hlsearch / diff update' })
 
 vim.keymap.set({ 'n', 'x' }, 'gw', '*N', { desc = 'Search word under cursor' })
 
