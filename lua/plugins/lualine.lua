@@ -8,7 +8,7 @@ return {
       theme = 'onedark',
     },
     tabline = {
-      lualine_a = { 'buffers' },
+      lualine_a = { { 'buffers', max_length = function() return vim.go.columns end, } },
     },
   },
 }
