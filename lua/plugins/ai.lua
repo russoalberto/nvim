@@ -10,12 +10,17 @@ return {
       require("codecompanion").setup({
         strategies = {
           chat = {
-            adapter = "mistral",
+            adapter = "gemini",
           },
           inline = {
-            adapter = "mistral",
+            adapter = "gemini",
           },
         },
+        display = {
+          action_palette = {
+            provider = "snacks", 
+          },
+        }
       })
     end,
   },
