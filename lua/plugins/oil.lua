@@ -8,11 +8,12 @@ return {
       keymaps = {
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
-        ["<A-s>"] = "actions.select_vsplit",
-        ["<A-h>"] = "actions.select_split",
+        ["<leader>v"] = "actions.select_vsplit",
+        ["<leader>s"] = "actions.select_split",
         ["<C-t>"] = "actions.select_tab",
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = "actions.close",
+        ["q"] = "actions.close",
         ["<C-l>"] = "actions.refresh",
         ["-"] = "actions.parent",
         ["_"] = "actions.open_cwd",
@@ -27,6 +28,5 @@ return {
     })
     -- File Explorer
     vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { silent = true })
-    vim.keymap.set('n', '<leader>-', '<Cmd>Oil --float<CR>', { desc = '[-] File Explorer' })
   end
 }
