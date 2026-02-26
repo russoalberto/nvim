@@ -10,10 +10,8 @@ vim.keymap.set('n', '<C-j>', '<Cmd>NavigatorDown<CR>', { silent = true })
 vim.keymap.set('n', '<C-k>', '<Cmd>NavigatorUp<CR>', { silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic [E]rror' })
-vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Oper [D]iagnostics list' })
+vim.keymap.set('n', '<leader>E', vim.diagnostic.setloclist, { desc = 'Open Diagnostic [E]rror list' })
 
 -- Move Lines
 vim.keymap.set('n', '<A-j>', '<cmd>m .+1<cr>==', { desc = 'Move down' })

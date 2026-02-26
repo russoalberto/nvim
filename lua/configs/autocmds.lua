@@ -78,7 +78,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- resize splits if window got resized
+-- Resize splits if window got resized
 vim.api.nvim_create_autocmd({ 'VimResized' }, {
   group = augroup 'resize_splits',
   callback = function()
@@ -125,6 +125,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local setOpts = function(desc)
       return { buffer = ev.buf, desc = desc }
     end
+
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, setOpts('[G]oto [D]eclaration'))
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, setOpts('[G]oto [D]efinition'))
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, setOpts('[G]oto [R]eferences'))
@@ -137,14 +138,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.keymap.set('n', '<leader>rr', vim.lsp.buf.rename, setOpts('[R]e[n]ame'))
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, setOpts('[C]ode [A]ction'))
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, setOpts('Hover Documentation'))
     vim.keymap.set('n', '<leader>k', vim.lsp.buf.signature_help, setOpts('Signature Documentation'))
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, setOpts('Type [D]efinition'))
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(ev.buf, 'Format', function(_)
       vim.lsp.buf.format()
     end, { desc = 'Format current buffer with LSP' })
-
 
     -- Format on save
     vim.api.nvim_create_autocmd("BufWritePre", {
@@ -153,6 +152,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.lsp.buf.format { async = false }
       end
     })
+
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client and client.server_capabilities.documentHighlightProvider then
       vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -165,6 +165,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         callback = vim.lsp.buf.clear_references,
       })
     end
+
     -- Create fix using command for Cshap buffer
     create_csharp_fix_using_command(ev.buf)
   end
