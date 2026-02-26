@@ -13,6 +13,7 @@ return {
       'Exafunction/codeium.nvim',
     },
     config = function()
+      local disabled_filetypes = { 'oil', 'alpha' }
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       require('codeium').setup({})
@@ -58,13 +59,16 @@ return {
             end
           end, { 'i', 's' }),
         },
-        sources = {
+        sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'luasnip', max_item_count = 5 },
           { name = 'codeium', max_item_count = 3 },
           { name = 'path' },
-        },
+        }),
       }
+      cmp.setup.filetype(disabled_filetypes, {
+        enabled = false
+      })
     end,
   }
 }
