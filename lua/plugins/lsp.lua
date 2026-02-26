@@ -98,13 +98,10 @@ return {
         automatic_installation = false,
         ensure_installed = vim.tbl_keys(servers),
       }
-      mason_lspconfig.setup_handlers {
-        function(server_name)
-          local server_opts = servers[server_name] or {}
-          table.insert(server_opts, { capabilities = capabilities })
-          require('lspconfig')[server_name].setup(server_opts)
-        end
-      }
+      for server, config in ipairs(servers) do
+        table.insert(config, { capabilities = capabilities })
+        require('lspconfig')[server].setup(config)
+      end
     end,
   },
 }
