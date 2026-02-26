@@ -1,7 +1,7 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.5',
+    branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
@@ -44,8 +44,6 @@ return {
         })
       end, { desc = '[/] Search in current buffer' })
       vim.keymap.set('n', '<leader>.', builtin.oldfiles, { desc = '[.] Search recent files ("." for repeat)' })
-      vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = '[U]ndo tree' })
-
       vim.keymap.set('n', '<leader>sG', builtin.git_files, { desc = 'Search [G]it [F]iles' })
       vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch existing [B]uffers' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
