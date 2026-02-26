@@ -40,6 +40,7 @@ vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
 
 -- Search
 vim.keymap.set({ 'n', 'x' }, 'gw', '*N', { desc = 'Search word under cursor' })
+
 -- Clear search with <esc>
 vim.keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
 
@@ -48,6 +49,9 @@ vim.keymap.set({ 'i', 'v', 'n', 's' }, '<c-s>', '<cmd>w<cr><esc>', { desc = 'sav
 
 -- Lazy
 vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = '[L]azy' })
+
+-- Mason
+vim.keymap.set('n', '<leader>m', '<cmd>Mason<cr>', { desc = '[M]ason' })
 
 -- Hardmode: disable arrow keys
 vim.keymap.set({ 'v', 'n', 's' }, '<Left>', '<Nop>', { silent = true })
