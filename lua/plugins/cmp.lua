@@ -12,8 +12,8 @@ return {
         ["<Tab>"] = { "select_next", "select_and_accept", "fallback" },
         ["<S-Tab>"] = { "select_prev", "select_and_accept", "fallback" },
       },
-      sources = {
-        cmdline = {},
+      cmdline = {
+        enabled = false,
       },
       completion = {
         documentation = { auto_show = true, auto_show_delay_ms = 500 },
