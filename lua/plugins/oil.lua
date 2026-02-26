@@ -26,5 +26,8 @@ return {
       },
       use_default_keymaps = false,
     })
+    -- File Explorer
+    vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { silent = true })
+    vim.keymap.set('n', '<leader>-', '<Cmd>Oil --float<CR>', { desc = '[-] File Explorer' })
   end
 }
