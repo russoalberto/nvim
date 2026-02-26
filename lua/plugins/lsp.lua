@@ -42,8 +42,9 @@ local servers = {
   marksman = {},
   -- system
   bashls = {},
-  rust_analyzer = {},
   clangd = {},
+  ols = {},
+  rust_analyzer = {},
   -- misc
   grammarly = {},
   prismals = {},
