@@ -43,7 +43,6 @@ local servers = {
 
 return {
   {
-    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
@@ -52,7 +51,6 @@ return {
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
@@ -61,10 +59,8 @@ return {
     config = function()
       -- Setup neovim lua configuration
       require('neodev').setup()
-
       -- Setup Mason
       require('mason').setup()
-
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)

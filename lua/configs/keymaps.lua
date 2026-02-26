@@ -21,6 +21,7 @@ wk.register({
     s = { '<Cmd>BufferLineSortByDirectory<CR>', 'Sort by directory' },
     r = { '<Cmd>BufferLineSortByRelativeDirectory<CR>', 'Sort by relative directory' },
     e = { '<Cmd>:set modifiable!<CR>', 'Toggle modificable status to buffer' },
+    o = { '<Cmd>BufferLineCloseOthers<CR>', 'Close other buffers' }
   },
 }, {
   prefix = '<leader>',
@@ -40,23 +41,12 @@ vim.keymap.set('n', '<A-i>', function()
   vim.lsp.buf.format { async = true }
 end, { silent = true })
 
--- Zen mode
-wk.register({
-  z = {
-    name = 'Zen mode',
-    z = { '<Cmd>ZenMode<CR>', 'Toggle zen mode' },
-  },
-}, {
-  prefix = '<leader>',
-})
 
 -- Undo tree
 wk.register({
-  h = {
-    name = 'Undo tree',
-    s = { '<Cmd>UndotreeShow<CR>', 'Show undo tree' },
-    h = { '<Cmd>UndotreeHide<CR>', 'Hide undo tree' },
-    t = { '<Cmd>UndotreeToggle<CR>', 'Toggle undo tree' },
+  u = {
+    '<cmd>Telescope undo<cr>',
+    'Show undo tree'
   },
 }, {
   prefix = '<leader>',
@@ -87,12 +77,13 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set({ 'n', 'x' }, 'gw', '*N', { desc = 'Search word under cursor' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- better up/down
 vim.keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -117,13 +108,6 @@ vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffe
 -- Clear search with <esc>
 vim.keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
 
--- Clear search, diff update and redraw
--- taken from runtime/lua/_editor.lua
-vim.keymap.set('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
-  { desc = 'Redraw / clear hlsearch / diff update' })
-
-vim.keymap.set({ 'n', 'x' }, 'gw', '*N', { desc = 'Search word under cursor' })
-
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set('n', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'next search result' })
 vim.keymap.set('x', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'next search result' })
@@ -132,16 +116,8 @@ vim.keymap.set('n', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'prev se
 vim.keymap.set('x', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'prev search result' })
 vim.keymap.set('o', 'n', "'nn'[v:searchforward]", { expr = true, desc = 'prev search result' })
 
--- add undo break-points
-vim.keymap.set('i', ',', ',<c-g>u')
-vim.keymap.set('i', '.', '.<c-g>u')
-vim.keymap.set('i', ';', ';<c-g>u')
-
 -- save file
 vim.keymap.set({ 'i', 'v', 'n', 's' }, '<c-s>', '<cmd>w<cr><esc>', { desc = 'save file' })
-
---keywordprg
-vim.keymap.set('n', '<leader>k', '<cmd>norm! k<cr>', { desc = 'keywordprg' })
 
 -- better indenting
 vim.keymap.set('v', '<', '<gv')
@@ -149,11 +125,6 @@ vim.keymap.set('v', '>', '>gv')
 
 -- lazy
 vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
-
--- highlights under cursor
-if vim.fn.has 'nvim-0.9.0' == 1 then
-  vim.keymap.set('n', '<leader>ui', vim.show_pos, { desc = 'Inspect Pos' })
-end
 
 -- Hardmode: disable arrow keys
 vim.keymap.set({ 'v', 'n', 's' }, '<Left>', '<Nop>', { silent = true })
