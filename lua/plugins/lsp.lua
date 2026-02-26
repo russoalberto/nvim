@@ -174,7 +174,8 @@ return {
             })
           end
         end,
-        root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git', 'package.json'),
+        root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git',
+          'package.json'),
         sources = {
           require 'typescript.extensions.null-ls.code-actions',
           nls.builtins.formatting.stylua,

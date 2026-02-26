@@ -31,6 +31,7 @@ return {
       },
     },
     window = {
+      width = 60,
       mappings = {
         ['<space>'] = 'none',
       },
