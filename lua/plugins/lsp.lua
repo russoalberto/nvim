@@ -27,6 +27,15 @@ local servers = {
       ["textDocument/definition"] = function(...)
         return require("omnisharp_extended").handler(...)
       end,
+      ["textDocument/typeDefinition"] = function(...)
+        return require("omnisharp_extended").handler(...)
+      end,
+      ["textDocument/references"] = function(...)
+        return require("omnisharp_extended").handler(...)
+      end,
+      ["textDocument/implementation"] = function(...)
+        return require("omnisharp_extended").handler(...)
+      end,
     },
     enable_roslyn_analyzers = true,
     organize_imports_on_format = true,
