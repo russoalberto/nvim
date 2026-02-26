@@ -43,6 +43,7 @@ local servers = {
   -- system
   bashls = {},
   rust_analyzer = {},
+  clangd = {},
   -- misc
   grammarly = {},
   prismals = {},
