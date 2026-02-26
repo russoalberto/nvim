@@ -86,3 +86,46 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
+
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = augroup 'lsp_attach',
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local setOpts = function(desc)
+      return { buffer = ev.buf, desc = desc }
+    end
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, setOpts('[G]oto [D]eclaration'))
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, setOpts('[G]oto [D]efinition'))
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, setOpts('[G]oto [R]eferences'))
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, setOpts('[G]oto [I]mplementation'))
+    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, setOpts('[W]orkspace [A]dd Folder'))
+    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, setOpts('[W]orkspace [R]emove Folder'))
+    vim.keymap.set('n', '<leader>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, setOpts('[W]orkspace [L]ist Folders'))
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, setOpts('[R]e[n]ame'))
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, setOpts('[C]ode [A]ction'))
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, setOpts('Hover Documentation'))
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, setOpts('Signature Documentation'))
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, setOpts('Type [D]efinition'))
+    vim.keymap.set('n', '<leader>f', function()
+      vim.lsp.buf.format { async = true }
+    end, setOpts('Format'))
+    -- Create a command `:Format` local to the LSP buffer
+    vim.api.nvim_buf_create_user_command(ev.buf, 'Format', function(_)
+      vim.lsp.buf.format()
+    end, { desc = 'Format current buffer with LSP' })
+    -- Format on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = ev.buf,
+      callback = function()
+        vim.lsp.buf.format { async = false }
+      end
+    })
+  end
+})
