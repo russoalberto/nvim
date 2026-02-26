@@ -14,10 +14,9 @@ wk.register({
   b = {
     name = 'BufferLine',
     k = { '<Cmd>BufferLinePick<CR>', 'Pick buffer' },
-    K = { '<Cmd>BufferLinePickClose<CR>', 'Close buffer' },
     p = { '<Cmd>BufferLineTogglePin<CR>', 'Pin buffer' },
     P = { '<Cmd>BufferLineGroupClose ungrouped<CR>', 'Unpin buffer' },
-    b = { '<Cmd>Bdelete<CR>', 'Close buffer' },
+    b = { '<Cmd>bdelete<CR>', 'Close buffer' },
     t = { '<Cmd>BufferLineSortByTabs<CR>', 'Sort by tabs' },
     s = { '<Cmd>BufferLineSortByDirectory<CR>', 'Sort by directory' },
     r = { '<Cmd>BufferLineSortByRelativeDirectory<CR>', 'Sort by relative directory' },
@@ -63,10 +62,10 @@ wk.register({
   prefix = '<leader>',
 })
 
-map('n', '<C-h>', '<Cmd>TmuxNavigateLeft<CR>', opts)
-map('n', '<C-l>', '<Cmd>TmuxNavigateRight<CR>', opts)
-map('n', '<C-j>', '<Cmd>TmuxNavigateDown<CR>', opts)
-map('n', '<C-k>', '<Cmd>TmuxNavigateUp<CR>', opts)
+map('n', '<C-h>', '<Cmd>NavigatorLeft<CR>', opts)
+map('n', '<C-l>', '<Cmd>NavigatorRight<CR>', opts)
+map('n', '<C-j>', '<Cmd>NavigatorDown<CR>', opts)
+map('n', '<C-k>', '<Cmd>NavigatorUp<CR>', opts)
 
 -- LazyGit
 map('n', '<leader>gg', '<Cmd>LazyGit<CR>', opts)
