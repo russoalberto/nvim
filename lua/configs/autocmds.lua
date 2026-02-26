@@ -79,68 +79,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.buf.format()
     end, { desc = 'Format current buffer with LSP' })
 
-    -- Format on save
-    local formatDisableType = {
-      ["html"] = true
-    }
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = ev.buf,
-      callback = function()
-        if formatDisableType[vim.bo.filetype] ~= true then
-          vim.lsp.buf.format { async = false }
-        end
-      end
-    })
-
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client and client.server_capabilities.documentHighlightProvider then
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-        buffer = ev.buf,
-        callback = vim.lsp.buf.document_highlight,
-      })
-
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        buffer = ev.buf,
-        callback = vim.lsp.buf.clear_references,
-      })
-    end
-
     --Create fix using command for Cshap buffer
     csharp.create_fix_usings_command(ev.buf)
     csharp.create_fix_all_command(ev.buf)
   end
-})
-
-vim.filetype.add({
-  pattern = {
-    [".*"] = {
-      function(path, buf)
-        return vim.bo[buf]
-            and vim.bo[buf].filetype ~= "bigfile"
-            and path
-            and vim.fn.getfsize(path) > vim.g.bigfile_size
-            and "bigfile"
-            or nil
-      end,
-    },
-  },
-})
-
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("bigfile"),
-  pattern = "bigfile",
-  callback = function(ev)
-    vim.b.minianimate_disable = true
-    vim.schedule(function()
-      vim.bo[ev.buf].syntax = vim.filetype.match({ buf = ev.buf }) or ""
-    end)
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("filetype"),
-  pattern = "odin",
-  callback = function()
-    vim.opt.expandtab = false;
-  end,
 })
