@@ -46,3 +46,11 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = vim.api.nvim_create_augroup("caddyfile_ft", { clear = true }),
+  pattern = { "Caddyfile", "caddyfile", "*.Caddyfile", "*.caddyfile", "Caddyfile.dev", "Caddyfile.prod" },
+  callback = function()
+    vim.bo.filetype = "caddy"
+  end,
+})
