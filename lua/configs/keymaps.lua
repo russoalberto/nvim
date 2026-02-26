@@ -8,19 +8,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Move to previous/next
 map('n', '<A-,>', '<Cmd>BufferLineCyclePrev<CR>', opts)
 map('n', '<A-.>', '<Cmd>BufferLineCycleNext<CR>', opts)
--- Re-order to previous/next
-map('n', '<A-<>', '<Cmd>BufferLineMovePrev<CR>', opts)
-map('n', '<A->>', '<Cmd>BufferLineMoveNext<CR>', opts)
--- Goto buffer in position...
-map('n', '<A-1>', '<Cmd>BufferLineGoToBuffer 1<CR>', opts)
-map('n', '<A-2>', '<Cmd>BufferLineGoToBuffer 2<CR>', opts)
-map('n', '<A-3>', '<Cmd>BufferLineGoToBuffer 3<CR>', opts)
-map('n', '<A-4>', '<Cmd>BufferLineGoToBuffer 4<CR>', opts)
-map('n', '<A-5>', '<Cmd>BufferLineGoToBuffer 5<CR>', opts)
-map('n', '<A-6>', '<Cmd>BufferLineGoToBuffer 6<CR>', opts)
-map('n', '<A-7>', '<Cmd>BufferLineGoToBuffer 7<CR>', opts)
-map('n', '<A-8>', '<Cmd>BufferLineGoToBuffer 8<CR>', opts)
-map('n', '<A-9>', '<Cmd>BufferLineGoToBuffer 9<CR>', opts)
 
 -- BufferLine
 wk.register({
@@ -162,23 +149,6 @@ vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 if vim.fn.has 'nvim-0.9.0' == 1 then
   vim.keymap.set('n', '<leader>ui', vim.show_pos, { desc = 'Inspect Pos' })
 end
-
--- Terminal Mappings
-vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
-vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
-vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
-vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
-vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Go to right window' })
-vim.keymap.set('t', '<C-/>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
-vim.keymap.set('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
-
--- windows
-vim.keymap.set('n', '<leader>ww', '<C-W>p', { desc = 'Other window', remap = true })
-vim.keymap.set('n', '<leader>wd', '<C-W>c', { desc = 'Delete window', remap = true })
-vim.keymap.set('n', '<leader>w-', '<C-W>s', { desc = 'Split window below', remap = true })
-vim.keymap.set('n', '<leader>w|', '<C-W>v', { desc = 'Split window right', remap = true })
-vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split window below', remap = true })
-vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split window right', remap = true })
 
 -- Hardmode: disable arrow keys
 vim.keymap.set({ 'i', 'v', 'n', 's' }, '<Left>', '<Nop>', { silent = true })
