@@ -1,5 +1,5 @@
 local M = {}
-local utils = require("langs.csharp.utils")
+local common = require("utils.csharp.common")
 
 M.scope = {
   Document = 0,
@@ -16,7 +16,7 @@ local function handle_run_fix_all(error, response)
     end
 
     local file_uri = vim.uri_from_fname(change.FileName)
-    local text_edits = utils.omnisharp_text_changes_to_text_edits(change.Changes)
+    local text_edits = common.omnisharp_text_changes_to_text_edits(change.Changes)
     workspace_edits.changes[file_uri] = text_edits
 
     ::continue::
@@ -35,7 +35,7 @@ local function run_fix_all(client_id, buffer, params)
     WantsAllCodeActionOperations = true,
     WantsTextChanges = true,
     ApplyChanges = false,
-    Timeout = 2000,
+    Timeout = 5000,
   }
 
   omnisharp_client.request("o#/runfixall", request, handle_run_fix_all, buffer)
@@ -62,7 +62,7 @@ function M.execute(buffer, params)
     return
   end
 
-  local omnisharp_client = utils.get_omnisharp_client(buffer)
+  local omnisharp_client = common.get_omnisharp_client(buffer)
 
   if omnisharp_client == nil then
     return

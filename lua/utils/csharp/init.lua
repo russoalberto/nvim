@@ -1,5 +1,5 @@
-local fixAll = require("langs.csharp.fix-all")
-local fixUsings = require("langs.csharp.fix-usings")
+local fixAll = require("utils.csharp.fix-all")
+local fixUsings = require("utils.csharp.fix-usings")
 
 local M = {}
 
