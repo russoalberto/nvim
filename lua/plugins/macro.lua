@@ -1,5 +1,6 @@
 return -- lazy.nvim
 {
-  'chrisgrieser/nvim-recorder',
-  opts = {}, -- required even with default settings, since it calls `setup()`
+  -- Disable
+  -- 'chrisgrieser/nvim-recorder',
+  -- opts = {}, -- required even with default settings, since it calls `setup()`
 }
