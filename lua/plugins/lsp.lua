@@ -81,13 +81,21 @@ return {
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+          library = {
+            -- See the configuration section for more details
+            -- Load luvit types when the `vim.uv` word is found
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          },
+        },
+      },
       -- Additional plugins for .net
       "Hoffs/omnisharp-extended-lsp.nvim",
     },
     config = function()
-      -- Setup neovim lua configuration
-      require('neodev').setup()
       -- Setup Mason
       require('mason').setup()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
