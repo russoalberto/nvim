@@ -1,73 +1,7 @@
+local csharp = require("langs.csharp")
+
 local function augroup(name)
   return vim.api.nvim_create_augroup('nvim_' .. name, { clear = true })
-end
-
-local function create_csharp_fix_using_command(buffer)
-  local get_omnisharp_client = function(buffer)
-    local clients = vim.lsp.get_active_clients({ buffer = buffer })
-    for _, client in ipairs(clients) do
-      if client.name == "omnisharp" then
-        return client
-      end
-    end
-  end
-
-  local omnisharp_text_changes_to_text_edits = function(changes)
-    local textEdits = {}
-    for _, change in pairs(changes) do
-      local textEdit = {
-        newText = change.NewText,
-        range = {
-          start = {
-            line = change.StartLine,
-            character = change.StartColumn,
-          },
-          ["end"] = {
-            line = change.EndLine,
-            character = change.EndColumn,
-          },
-        },
-      }
-
-      table.insert(textEdits, textEdit)
-    end
-
-    return textEdits
-  end
-  local omnisharp_client = get_omnisharp_client(buffer)
-
-  if omnisharp_client ~= nil then
-    vim.api.nvim_buf_create_user_command(buffer, 'CsFixUsing', function()
-      local position_params = vim.lsp.util.make_position_params(0, "utf-8")
-
-      local request = {
-        Column = position_params.position.character,
-        Line = position_params.position.line,
-        FileName = vim.uri_to_fname(position_params.textDocument.uri),
-        WantsTextChanges = true,
-        ApplyTextChanges = false,
-      }
-      local response = omnisharp_client.request_sync("o#/fixusings", request, 2000, buffer)
-      if response == nil then
-        print("Failed to fix usings")
-        return
-      end
-
-      if response.err ~= nil then
-        print(response.err)
-        return
-      end
-
-      if response.result.Changes == nil and vim.tbl_isempty(response.result.Changes) then
-        print("No changes to apply")
-        return
-      end
-
-      local text_edits = omnisharp_text_changes_to_text_edits(response.result.Changes)
-      vim.lsp.util.apply_text_edits(text_edits, buffer, "utf-8")
-      print("Changes apply")
-    end, { desc = 'Fix C# usings' })
-  end
 end
 
 -- Highlight on yank
@@ -166,7 +100,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    -- Create fix using command for Cshap buffer
-    create_csharp_fix_using_command(ev.buf)
+    --Create fix using command for Cshap buffer
+    csharp.create_fix_usings_command(ev.buf)
+    csharp.create_fix_all_command(ev.buf)
   end
 })
