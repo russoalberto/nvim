@@ -179,3 +179,9 @@ vim.keymap.set('n', '<leader>w-', '<C-W>s', { desc = 'Split window below', remap
 vim.keymap.set('n', '<leader>w|', '<C-W>v', { desc = 'Split window right', remap = true })
 vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split window below', remap = true })
 vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split window right', remap = true })
+
+-- Hardmode: disable arrow keys
+vim.keymap.set({ 'i', 'v', 'n', 's' }, '<Left>', '<Nop>', { silent = true })
+vim.keymap.set({ 'i', 'v', 'n', 's' }, '<Right>', '<Nop>', { silent = true })
+vim.keymap.set({ 'i', 'v', 'n', 's' }, '<Up>', '<Nop>', { silent = true })
+vim.keymap.set({ 'i', 'v', 'n', 's' }, '<Down>', '<Nop>', { silent = true })
