@@ -16,5 +16,17 @@ return {
       ['<C-k>'] = { 'select_prev', 'fallback_to_mappings' },
       ['<C-j>'] = { 'select_next', 'fallback_to_mappings' },
     },
+    sources = {
+      default = { 'lsp', 'easy-dotnet', 'path', 'snippets', 'buffer' },
+      providers = {
+        ['easy-dotnet'] = {
+          name = 'easy-dotnet',
+          enabled = true,
+          module = 'easy-dotnet.completion.blink',
+          score_offset = 10000,
+          async = true,
+        },
+      },
+    },
   },
 }

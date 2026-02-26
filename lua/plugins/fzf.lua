@@ -14,6 +14,7 @@ return {
     { '<leader>.', '<cmd>FzfLua oldfiles<cr>', desc = '[S]earch [O]ldfiles' },
     { '<leader>sr', '<cmd>FzfLua resume<cr>', desc = '[R]esume last [f]ind result' },
     { '<leader>sd', '<cmd>FzfLua diagnostics_document<cr>', desc = '[S]earch buffer [d]iagnostic' },
+    { '<leader>sD', '<cmd>FzfLua lsp_workspace_diagnostic<cr>', desc = '[S]earch Workspace [d]iagnostic' },
     { '<leader>gb', '<cmd>FzfLua git_bcommits<cr>', desc = '[G]it [B]uffer commits' },
     { '<leader>gl', '<cmd>FzfLua git_blame<cr>', desc = '[G]it blame [L]ine' },
     { '<leader>gc', '<cmd>FzfLua git_commits<cr>', desc = '[G]it [C]ommits (cwd)' },
@@ -32,10 +33,23 @@ return {
   opts = {
     files = {
       path_shorten = 3,
+      hidden = false,
+    },
+    grep = {
+      path_shorten = 3,
+      hidden = false,
     },
     oldfiles = {
+      path_shorten = 3,
       include_current_session = true,
       cwd_only = true,
+    },
+    git = {
+      blame = {
+        winopts = {
+          preview = { hidden = 'hidden' }, -- Starts hidden, can be toggled
+        },
+      },
     },
     keymap = {
       fzf = {

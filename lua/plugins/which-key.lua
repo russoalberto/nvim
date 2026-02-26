@@ -11,6 +11,7 @@ return {
       { '<leader>n', group = '[N]ote' },
       { '<leader>s', group = '[S]earch' },
       { '<leader>z', group = '[Z]k notes' },
+      { 'gr', desc = '[R]efactor' },
       { 'grn', desc = 'Code Re[n]ame' },
     }
   end,

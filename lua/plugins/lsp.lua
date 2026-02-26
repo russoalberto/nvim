@@ -11,27 +11,6 @@ local servers = {
   jsonls = {},
   lua_ls = {},
   marksman = {},
-  omnisharp = {
-    handlers = {
-      ['textDocument/definition'] = function(...)
-        return require('omnisharp_extended').handler(...)
-      end,
-      ['textDocument/typeDefinition'] = function(...)
-        return require('omnisharp_extended').handler(...)
-      end,
-      ['textDocument/references'] = function(...)
-        return require('omnisharp_extended').handler(...)
-      end,
-      ['textDocument/implementation'] = function(...)
-        return require('omnisharp_extended').handler(...)
-      end,
-    },
-    enable_roslyn_analyzers = true,
-    organize_imports_on_format = true,
-    enable_import_completion = true,
-    include_prerelease_sdks = true,
-    enable_decompilation_support = true,
-  },
   prismals = {},
   sqlls = {},
   tailwindcss = {},
@@ -54,10 +33,14 @@ return {
         opts = {
           library = {
             { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+            'blink.cmp',
+            'lazy.nvim',
+            'nvim-dap-ui',
           },
         },
       },
-      'Hoffs/omnisharp-extended-lsp.nvim',
+      'GustavEikaas/easy-dotnet.nvim',
+      'nvim-lua/plenary.nvim',
     },
     config = function()
       require('mason').setup()
@@ -67,6 +50,30 @@ return {
       mason_lspconfig.setup {
         automatic_installation = false,
         ensure_installed = vim.tbl_keys(servers),
+      }
+      require('easy-dotnet').setup {
+        lsp = {
+          enabled = true,
+          preload_roslyn = true,
+          -- This enables the specific Roslyn analyzers you asked for
+          roslynator_enabled = true,
+          easy_dotnet_analyzer_enabled = true,
+          -- Matches your 'enable_import_completion' request
+          capabilities = {
+            definitionProvider = true,
+            referencesProvider = true,
+          },
+          -- Passing your requested settings to the server
+          settings = {
+            ['dotnet|roslyn'] = {
+              enable_roslyn_analyzers = true,
+              organize_imports_on_format = true,
+              enable_import_completion = true,
+              include_prerelease_sdks = true,
+              enable_decompilation_support = true,
+            },
+          },
+        },
       }
       for server, config in ipairs(servers) do
         table.insert(config, { capabilities = capabilities })

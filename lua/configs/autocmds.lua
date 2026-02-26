@@ -2,6 +2,25 @@ local function augroup(name)
   return vim.api.nvim_create_augroup('nvim_' .. name, { clear = true })
 end
 
+-- Filetype detection
+vim.filetype.add {
+  extension = {
+    tf = 'terraform',
+    tfstate = 'json',
+  },
+  filename = {
+    ['Caddyfile'] = 'caddy',
+    ['caddyfile'] = 'caddy',
+    ['Caddyfile.dev'] = 'caddy',
+    ['Caddyfile.prod'] = 'caddy',
+  },
+  pattern = {
+    ['.*%.Caddyfile'] = 'caddy',
+    ['.*%.caddyfile'] = 'caddy',
+    ['.*%.tf%.json'] = 'terraform',
+  },
+}
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = augroup 'highlight_yank',
@@ -11,7 +30,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Resize splits if window got resized
-vim.api.nvim_create_autocmd({ 'VimResized' }, {
+vim.api.nvim_create_autocmd('VimResized', {
   group = augroup 'resize_splits',
   callback = function()
     vim.cmd 'tabdo wincmd ='
@@ -21,12 +40,13 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd('BufReadPost', {
   group = augroup 'last_loc',
-  callback = function()
-    local exclude = { 'gitcommit' }
-    local buf = vim.api.nvim_get_current_buf()
-    if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
+  callback = function(event)
+    local exclude = { 'gitcommit', 'commit', 'gitrebase' }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].last_loc then
       return
     end
+    vim.b[buf].last_loc = true
     local mark = vim.api.nvim_buf_get_mark(buf, '"')
     local lcount = vim.api.nvim_buf_line_count(buf)
     if mark[1] > 0 and mark[1] <= lcount then
@@ -36,37 +56,24 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
-vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+vim.api.nvim_create_autocmd('BufWritePre', {
   group = augroup 'auto_create_dir',
   callback = function(event)
     if event.match:match '^%w%w+://' then
       return
     end
-    local file = vim.loop.fs_realpath(event.match) or event.match
+    local file = vim.uv.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = vim.api.nvim_create_augroup("caddyfile_ft", { clear = true }),
-  pattern = { "Caddyfile", "caddyfile", "*.Caddyfile", "*.caddyfile", "Caddyfile.dev", "Caddyfile.prod" },
-  callback = function()
-    vim.bo.filetype = "caddy"
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = vim.api.nvim_create_augroup("terraform_ft", { clear = true }),
-  pattern = { "*.tf.json", "*.tf"},
-  callback = function()
-    vim.bo.filetype = "terraform"
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = vim.api.nvim_create_augroup("json_ft", { clear = true }),
-  pattern = { "*.tfstate"},
-  callback = function()
-    vim.bo.filetype = "json"
+-- Auto format on save
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = augroup 'conform_format',
+  callback = function(args)
+    local ok, conform = pcall(require, 'conform')
+    if ok then
+      conform.format { bufnr = args.buf, lsp_fallback = true }
+    end
   end,
 })

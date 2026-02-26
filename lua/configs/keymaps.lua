@@ -15,7 +15,6 @@ vim.keymap.set('n', '<leader>Q', ':%bdelete<CR>', { desc = '[Q]uit all buffer' }
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic [E]rror' })
-vim.keymap.set('n', '<leader>E', vim.diagnostic.setloclist, { desc = 'Open Diagnostic [E]rror list' })
 
 -- Clear search with <esc>
 vim.keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
@@ -25,16 +24,12 @@ vim.keymap.set({ 'i', 'v', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'sav
 vim.keymap.set({ 'n' }, '<leader>w', '<cmd>w<cr><esc>', { desc = 'Save file' })
 
 --AI
-vim.keymap.set({ 'n', 'v' }, '<leader>aa', '<cmd>CodeCompanionActions<cr>', { desc = '[A]I [A]ctions' })
-vim.keymap.set({ 'n', 'v' }, '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', { desc = '[A]I [C]hat' })
-vim.keymap.set('v', '<leader>ad', '<cmd>CodeCompanionChat Add<cr>', { desc = '[A]I A[d]d' })
+vim.keymap.set({ 'n', 'v' }, '<leader>aa', function() require("opencode").select() end, { desc = '[A]I [A]ctions' })
+vim.keymap.set({ 'n', 'v' }, '<leader>ac', function() require("opencode").toggle() end, { desc = '[A]I [C]hat' })
+vim.keymap.set('v', '<leader>ad', function() require("opencode").ask("@this: ", { submit = true }) end, { desc = '[A]I A[d]d' })
 
 -- File explorer
 vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { silent = true })
-
--- Zk notes
-vim.keymap.set('n', '<leader>zn', '<Cmd>ZkNew<CR>', { desc = '[Z]k [N]ew' })
-vim.keymap.set('n', '<leader>zl', '<Cmd>ZkNotes<CR>', { desc = '[Z]k [L]ist' })
 
 -- Hardmode: disable arrow keys
 vim.keymap.set({ 'v', 'n', 's' }, '<Left>', '<Nop>', { silent = true })

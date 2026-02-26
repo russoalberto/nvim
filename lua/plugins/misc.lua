@@ -11,12 +11,14 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {
       preview = {
-        filetypes = {  'codecompanion' },
+        filetypes = { 'md', 'markdown' },
+        icon_provider = "mini",
         ignore_buftypes = {},
       },
     },
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
+      "saghen/blink.cmp",
     },
   },
 }
