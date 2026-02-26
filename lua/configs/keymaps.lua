@@ -34,6 +34,7 @@ wk.register({
     t = { '<Cmd>BufferLineSortByTabs<CR>', 'Sort by tabs' },
     s = { '<Cmd>BufferLineSortByDirectory<CR>', 'Sort by directory' },
     r = { '<Cmd>BufferLineSortByRelativeDirectory<CR>', 'Sort by relative directory' },
+    e = { '<Cmd>:set modifiable!<CR>', 'Toggle modificable status to buffer' },
   },
 }, {
   prefix = '<leader>',
