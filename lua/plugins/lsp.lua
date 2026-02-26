@@ -62,7 +62,6 @@ local servers = {
   -- fontend
   angularls = {},
   cssls = {},
-  -- eslint = {},
   tsserver = {},
   html = {
     settings = {
@@ -92,6 +91,7 @@ local servers = {
   jsonls = {},
   marksman = {},
   -- system
+  bashls = {},
   rust_analyzer = {},
   -- misc
   grammarly = {},
