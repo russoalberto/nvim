@@ -1,8 +1,14 @@
 return {
   -- Theme inspired by Atom
-  'navarasu/onedark.nvim',
-  priority = 1000,
-  config = function()
-    vim.cmd.colorscheme 'onedark'
-  end,
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      local onedark = require('onedark')
+      onedark.setup({
+        style = 'dark',
+      })
+      onedark.load()
+    end,
+  }
 }
