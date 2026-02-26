@@ -34,6 +34,8 @@ return {
         map('n', '<leader>gR', gs.reset_buffer, { desc = 'Reset buffer' })
         map('n', '<leader>gd', gs.diffthis, { desc = 'Diff line' })
         map('n', '<leader>gD', function() gs.diffthis('~') end, { desc = 'Diff buffer' })
+        map('n', '<leader>gb', gs.blame_line, { desc = 'Blame line' })
+        map('n', '<leader>gB', gs.blame, { desc = 'Blame file' })
 
         -- Visual mode actions
         map('v', 'gs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
@@ -49,7 +51,9 @@ return {
       'nvim-lua/plenary.nvim',
     },
     config = function()
-      vim.keymap.set('n', '<leader>gg', '<Cmd>LazyGit<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>gg', '<Cmd>LazyGit<CR>', { desc = 'Open LazyGit', silent = true })
+      vim.keymap.set('n', '<leader>gf', '<Cmd>LazyGitFilterCurrentFile<CR>',
+        { desc = 'Filter current file', silent = true })
     end
   },
 }
