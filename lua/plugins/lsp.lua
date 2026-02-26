@@ -151,51 +151,6 @@ return {
     end,
   },
   {
-    'jose-elias-alvarez/null-ls.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      'mason.nvim',
-      'jose-elias-alvarez/typescript.nvim',
-    },
-    opts = function()
-      local nls = require 'null-ls'
-      local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-      return {
-        on_attach = function(client, bufnr)
-          if client.supports_method 'textDocument/formatting' then
-            vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              group = augroup,
-              buffer = bufnr,
-              -- on 0.8, you should use vim.lsp.buf.format instead
-              callback = function()
-                vim.lsp.buf.format {}
-              end,
-            })
-          end
-        end,
-        root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git', 'package.json'),
-        sources = {
-          require 'typescript.extensions.null-ls.code-actions',
-          nls.builtins.formatting.stylua,
-          nls.builtins.formatting.shfmt,
-          nls.builtins.formatting.prettierd.with {
-            disabled_filetypes = { 'html' },
-            condition = function(utils)
-              return utils.root_has_file {
-                '.prettierrc.json',
-                '.prettierrc.yml',
-                '.prettierrc.yaml',
-                '.prettierrc.json5',
-              }
-            end,
-          },
-          -- nls.builtins.diagnostics.flake8,
-        },
-      }
-    end,
-  },
-  {
     'williamboman/mason.nvim',
     cmd = 'Mason',
     keys = { { '<leader>cm', '<cmd>Mason<cr>', desc = 'Mason' } },
