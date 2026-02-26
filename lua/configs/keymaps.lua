@@ -156,7 +156,7 @@ if vim.fn.has 'nvim-0.9.0' == 1 then
 end
 
 -- Hardmode: disable arrow keys
-vim.keymap.set({ 'i', 'v', 'n', 's' }, '<Left>', '<Nop>', { silent = true })
-vim.keymap.set({ 'i', 'v', 'n', 's' }, '<Right>', '<Nop>', { silent = true })
-vim.keymap.set({ 'i', 'v', 'n', 's' }, '<Up>', '<Nop>', { silent = true })
-vim.keymap.set({ 'i', 'v', 'n', 's' }, '<Down>', '<Nop>', { silent = true })
+vim.keymap.set({ 'v', 'n', 's' }, '<Left>', '<Nop>', { silent = true })
+vim.keymap.set({ 'v', 'n', 's' }, '<Right>', '<Nop>', { silent = true })
+vim.keymap.set({ 'v', 'n', 's' }, '<Up>', '<Nop>', { silent = true })
+vim.keymap.set({ 'v', 'n', 's' }, '<Down>', '<Nop>', { silent = true })
