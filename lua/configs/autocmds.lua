@@ -80,10 +80,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, { desc = 'Format current buffer with LSP' })
 
     -- Format on save
+    local formatDisableType = {
+      ["html"] = true
+    }
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = ev.buf,
       callback = function()
-        vim.lsp.buf.format { async = false }
+        if formatDisableType[vim.bo.filetype] ~= true then
+          vim.lsp.buf.format { async = false }
+        end
       end
     })
 
