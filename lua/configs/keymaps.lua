@@ -3,28 +3,14 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Move to previous/next
-vim.keymap.set('n', '<A-,>', '<Cmd>BufferLineCyclePrev<CR>', opts)
-vim.keymap.set('n', '<A-.>', '<Cmd>BufferLineCycleNext<CR>', opts)
-vim.keymap.set('n', '<A-/>', '<Cmd>e #<CR>', opts)
-
--- BufferLine
-vim.keymap.set('n', '<leader>bk', '<Cmd>BufferLinePick<CR>', { desc = 'Pick buffer' })
-vim.keymap.set('n', '<leader>bp', '<Cmd>BufferLineTogglePin<CR>', { desc = 'Pin buffer' })
-vim.keymap.set('n', '<leader>bP', '<Cmd>BufferLineGroupClose ungrouped<CR>', { desc = 'Unpin buffer' })
-vim.keymap.set('n', '<leader>bb', '<Cmd>bdelete<CR>', { desc = 'Close buffer' })
-vim.keymap.set('n', '<leader>bt', '<Cmd>BufferLineSortByTabs<CR>', { desc = 'Sort by tabs' })
-vim.keymap.set('n', '<leader>bs', '<Cmd>BufferLineSortByDirectory<CR>', { desc = 'Sort by directory' })
-vim.keymap.set('n', '<leader>br', '<Cmd>BufferLineSortByRelativeDirectory<CR>', { desc = 'Sort by relative directory' })
-vim.keymap.set('n', '<leader>be', '<Cmd>:set modifiable!<CR>', { desc = 'Toggle modificable status to buffer' })
-vim.keymap.set('n', '<leader>bo', '<Cmd>BufferLineCloseOthers<CR>', { desc = 'Close other buffers' })
+vim.keymap.set("n", "<A->>", ":blast<enter>", opts)
+vim.keymap.set("n", "<A-<>", ":bfirst<enter>", opts)
+vim.keymap.set("n", "<A-,>", ":bprev<enter>", opts)
+vim.keymap.set("n", "<A-.>", ":bnext<enter>", opts)
+vim.keymap.set("n", "<leader>q", ":bdelete<enter>", { desc = '[Q]uit current buffer' })
 
 -- File Explorer
 vim.keymap.set('n', '<A-f>', '<Cmd>Oil --float<CR>', opts)
-
--- LSP format
-vim.keymap.set('n', '<A-i>', function()
-  vim.lsp.buf.format { async = true }
-end, { silent = true })
 
 -- Undo tree
 vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = '[U]ndo tree' })
