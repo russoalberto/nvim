@@ -1,14 +1,10 @@
 return {
   {
     'lewis6991/gitsigns.nvim',
-    lazy = false,
-    config = function()
-      require('gitsigns').setup {}
-    end,
-  },
-  {
-    'f-person/git-blame.nvim',
-    event = 'VeryLazy',
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts  = {
+      current_line_blame = true
+    }
   },
   {
     'kdheepak/lazygit.nvim',
