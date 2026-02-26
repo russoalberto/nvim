@@ -4,6 +4,7 @@ local g = vim.g
 opt.breakindent = true        -- Enable break indent
 opt.clipboard = 'unnamedplus' -- Sync with system clipboard
 opt.colorcolumn = '120'       -- Highlight column 120
+opt.conceallevel = 2
 opt.confirm = true            -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true         -- Enable highlighting of the current line
 opt.expandtab = true          -- Use spaces instead of tabs
