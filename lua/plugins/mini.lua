@@ -1,6 +1,7 @@
 return {
- 'nvim-mini/mini.nvim',
+  'nvim-mini/mini.nvim',
   version = '*',
+  event = 'VeryLazy',
   config = function()
     require('mini.ai').setup()
     require('mini.bracketed').setup()

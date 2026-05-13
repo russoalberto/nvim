@@ -21,13 +21,53 @@ local servers = {
   },
   intelephense = {},
   jsonls = {},
-  lua_ls = {},
+  lua_ls = {
+    settings = {
+      Lua = {
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            vim.env.VIMRUNTIME,
+            '${3rd}/luv/library',
+          },
+        },
+      },
+    },
+  },
   marksman = {},
   prismals = {},
   sqlls = {},
   tailwindcss = {},
-  terraformls = {},
-  ts_ls = {},
+  terraformls = {
+    settings = {
+      terraform = {
+        experimentalFeatures = {
+          prefillRequiredFields = true,
+        },
+      },
+    },
+  },
+  ts_ls = {
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'none',
+          includeInlayEnumMemberValueHints = false,
+          includeInlayFunctionLikeReturnTypeHints = false,
+        },
+        tsserver = {
+          maxTsServerMemory = 8192,
+        },
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'none',
+          includeInlayEnumMemberValueHints = false,
+          includeInlayFunctionLikeReturnTypeHints = false,
+        },
+      },
+    },
+  },
   yamlls = {},
 }
 
@@ -56,26 +96,35 @@ return {
     },
     config = function()
       require('mason').setup()
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      local mason_lspconfig = require 'mason-lspconfig'
-      mason_lspconfig.setup {
-        automatic_installation = false,
+      local blink_capabilities = require('blink.cmp').get_lsp_capabilities()
+
+      -- mason-lspconfig: install ensured servers, disable auto-enable.
+      -- We handle server setup directly via lspconfig.setup() below.
+      require('mason-lspconfig').setup {
         ensure_installed = vim.tbl_keys(servers),
+        automatic_enable = false,
       }
+
+      -- Set up each server with blink.cmp capabilities + custom settings
+      -- Uses vim.lsp.config (nvim-lspconfig v3+ API) instead of deprecated require('lspconfig')[name].setup()
+      for server_name, server_opts in pairs(servers) do
+        local opts = vim.deepcopy(server_opts)
+        opts.capabilities = blink_capabilities
+        vim.lsp.config(server_name, opts)
+        vim.lsp.enable(server_name)
+      end
+
       require('easy-dotnet').setup {
         lsp = {
           enabled = true,
           preload_roslyn = true,
-          -- This enables the specific Roslyn analyzers you asked for
           roslynator_enabled = true,
           easy_dotnet_analyzer_enabled = true,
-          -- Matches your 'enable_import_completion' request
           capabilities = {
             definitionProvider = true,
             referencesProvider = true,
           },
-          -- Passing your requested settings to the server
           settings = {
             ['dotnet|roslyn'] = {
               enable_roslyn_analyzers = true,
@@ -87,10 +136,16 @@ return {
           },
         },
       }
-      for server, config in ipairs(servers) do
-        table.insert(config, { capabilities = capabilities })
-        require('lspconfig')[server].setup(config)
-      end
+
+      vim.diagnostic.config {
+        virtual_text = false,
+        update_in_insert = false,
+        severity_sort = true,
+        float = {
+          border = 'rounded',
+          source = true,
+        },
+      }
     end,
   },
 }

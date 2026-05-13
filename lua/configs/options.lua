@@ -19,6 +19,7 @@ vim.opt.smarttab = true
 vim.opt.softtabstop = 2 -- How many spaces are applied when pressing Tab
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
+vim.opt.foldlevelstart = 99 -- All folds open by default
 vim.opt.swapfile = false -- Disable swapfile
 vim.opt.tabstop = 2 -- Number of spaces tabs count for
 vim.opt.undofile = true

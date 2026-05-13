@@ -1,14 +1,19 @@
 return {
   {
     'numToStr/Navigator.nvim',
+    keys = {
+      { '<C-h>', '<Cmd>NavigatorLeft<CR>', desc = 'Navigate left' },
+      { '<C-l>', '<Cmd>NavigatorRight<CR>', desc = 'Navigate right' },
+      { '<C-j>', '<Cmd>NavigatorDown<CR>', desc = 'Navigate down' },
+      { '<C-k>', '<Cmd>NavigatorUp<CR>', desc = 'Navigate up' },
+    },
     config = function()
       require('Navigator').setup {}
     end,
-    lazy = false,
   },
   {
     'OXY2DEV/markview.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
+    ft = { 'markdown' },
     opts = {
       preview = {
         filetypes = { 'md', 'markdown' },
