@@ -66,14 +66,3 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
-
--- Auto format on save
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = augroup 'conform_format',
-  callback = function(args)
-    local ok, conform = pcall(require, 'conform')
-    if ok then
-      conform.format { bufnr = args.buf, lsp_fallback = true }
-    end
-  end,
-})

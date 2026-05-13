@@ -6,7 +6,19 @@ local servers = {
   cssls = {},
   docker_compose_language_service = {},
   dockerls = {},
-  html = {},
+  html = {
+    settings = {
+      html = {
+        format = {
+          tabSize = 2,
+          insertSpace = true,
+          wrapAttributesIndentSize = 2,
+          wrapAttributes = 'preserve',
+          wrapLineLength = 0,
+        },
+      },
+    },
+  },
   intelephense = {},
   jsonls = {},
   lua_ls = {},

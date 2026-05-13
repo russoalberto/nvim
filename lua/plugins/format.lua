@@ -13,6 +13,7 @@ return {
     formatters_by_ft = {
       cs = { 'csharpier' },
       htmlangular = { 'prettier' },
+      html = { 'prettier' },
       lua = { 'stylua' },
       php = { 'php_cs_fixer' },
       terraform = { 'terraform' },
