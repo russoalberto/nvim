@@ -4,12 +4,6 @@ vim.keymap.set('n', '<leader>r', ':bufdo e<CR>', { desc = '[R]eload buffer' })
 vim.keymap.set('n', '<M-j>', ':cnext<CR>', { silent = true })
 vim.keymap.set('n', '<M-k>', ':cprev<CR>', { silent = true })
 
--- Tmux
-vim.keymap.set('n', '<C-h>', '<Cmd>NavigatorLeft<CR>', { silent = true })
-vim.keymap.set('n', '<C-l>', '<Cmd>NavigatorRight<CR>', { silent = true })
-vim.keymap.set('n', '<C-j>', '<Cmd>NavigatorDown<CR>', { silent = true })
-vim.keymap.set('n', '<C-k>', '<Cmd>NavigatorUp<CR>', { silent = true })
-
 vim.keymap.set('n', '<leader>q', ':bdelete<CR>', { desc = '[Q]uit current buffer' })
 vim.keymap.set('n', '<leader>Q', ':%bdelete<CR>', { desc = '[Q]uit all buffer' })
 
