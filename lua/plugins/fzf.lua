@@ -55,7 +55,4 @@ return {
     },
     fzf_opts = { ['--cycle'] = true },
   },
-  init = function()
-    require('fzf-lua').register_ui_select()
-  end,
 }

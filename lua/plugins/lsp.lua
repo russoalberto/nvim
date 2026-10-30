@@ -1,8 +1,6 @@
 local servers = {
   angularls = {},
-  astro = {},
   bashls = {},
-  clangd = {},
   cssls = {},
   docker_compose_language_service = {},
   dockerls = {},
@@ -19,7 +17,6 @@ local servers = {
       },
     },
   },
-  intelephense = {},
   jsonls = {},
   lua_ls = {
     settings = {
@@ -70,7 +67,7 @@ return {
     dependencies = {
       'mason-org/mason.nvim',
       'mason-org/mason-lspconfig.nvim',
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim', tag = 'v2.0.0', opts = {} },
       {
         'folke/lazydev.nvim',
         ft = 'lua',
@@ -79,7 +76,6 @@ return {
             { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
             'blink.cmp',
             'lazy.nvim',
-            'nvim-dap-ui',
           },
         },
       },
