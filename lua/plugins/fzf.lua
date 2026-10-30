@@ -32,15 +32,12 @@ return {
   },
   opts = {
     files = {
-      path_shorten = 3,
       hidden = false,
     },
     grep = {
-      path_shorten = 3,
       hidden = false,
     },
     oldfiles = {
-      path_shorten = 3,
       include_current_session = true,
       cwd_only = true,
     },

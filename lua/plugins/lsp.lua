@@ -38,15 +38,7 @@ local servers = {
   prismals = {},
   sqlls = {},
   tailwindcss = {},
-  terraformls = {
-    settings = {
-      terraform = {
-        experimentalFeatures = {
-          prefillRequiredFields = true,
-        },
-      },
-    },
-  },
+  tofu_ls = {},
   ts_ls = {
     settings = {
       typescript = {

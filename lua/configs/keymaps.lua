@@ -17,11 +17,6 @@ vim.keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and 
 vim.keymap.set({ 'i', 'v', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'save file' })
 vim.keymap.set({ 'n' }, '<leader>w', '<cmd>w<cr><esc>', { desc = 'Save file' })
 
---AI
-vim.keymap.set({ 'n', 'v' }, '<leader>aa', function() require("opencode").select() end, { desc = '[A]I [A]ctions' })
-vim.keymap.set({ 'n', 'v' }, '<leader>ac', function() require("opencode").toggle() end, { desc = '[A]I [C]hat' })
-vim.keymap.set('v', '<leader>ad', function() require("opencode").ask("@this: ", { submit = true }) end, { desc = '[A]I A[d]d' })
-
 -- File explorer
 vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { silent = true })
 
