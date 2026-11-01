@@ -33,6 +33,7 @@ local servers = {
   },
   marksman = {},
   prismals = {},
+  sqls = {},
   tailwindcss = {},
   tofu_ls = {
     root_dir = function(bufnr, on_dir)
