@@ -21,7 +21,9 @@ return {
       providers = {
         ['easy-dotnet'] = {
           name = 'easy-dotnet',
-          enabled = true,
+          enabled = function()
+            return package.loaded['easy-dotnet'] ~= nil and vim.tbl_contains({ 'csproj', 'fsproj', 'xml' }, vim.bo.filetype)
+          end,
           module = 'easy-dotnet.completion.blink',
           score_offset = 10000,
           async = true,

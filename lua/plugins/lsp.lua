@@ -85,8 +85,6 @@ return {
           },
         },
       },
-      'GustavEikaas/easy-dotnet.nvim',
-      'nvim-lua/plenary.nvim',
     },
     config = function()
       require('mason').setup()
@@ -108,28 +106,6 @@ return {
         vim.lsp.config(server_name, opts)
         vim.lsp.enable(server_name)
       end
-
-      require('easy-dotnet').setup {
-        lsp = {
-          enabled = true,
-          preload_roslyn = true,
-          roslynator_enabled = true,
-          easy_dotnet_analyzer_enabled = true,
-          capabilities = {
-            definitionProvider = true,
-            referencesProvider = true,
-          },
-          settings = {
-            ['dotnet|roslyn'] = {
-              enable_roslyn_analyzers = true,
-              organize_imports_on_format = true,
-              enable_import_completion = true,
-              include_prerelease_sdks = true,
-              enable_decompilation_support = true,
-            },
-          },
-        },
-      }
 
       vim.diagnostic.config {
         virtual_text = false,

@@ -1,5 +1,5 @@
 -- Reload buffer
-vim.keymap.set('n', '<leader>r', ':bufdo e<CR>', { desc = '[R]eload buffer' })
+vim.keymap.set('n', '<leader>r', ':e<CR>', { desc = '[R]eload buffer' })
 -- Move to previous/next quickfix
 vim.keymap.set('n', '<M-j>', ':cnext<CR>', { silent = true })
 vim.keymap.set('n', '<M-k>', ':cprev<CR>', { silent = true })
